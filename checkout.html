@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - TechBazaar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .checkout-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .form-input:focus {
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+        }
+
+        .progress-step.active {
+            background-color: #ea580c;
+            color: white;
+        }
+
+        .progress-step.completed {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        .order-summary-item:hover {
+            background-color: #f8fafc;
+        }
+
+        .payment-card {
+            transition: all 0.3s ease;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-card.selected {
+            border-color: #ea580c;
+            box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
+        }
+
+        .error-message {
+            display: none;
+        }
+
+        .error .error-message {
+            display: block;
+        }
+
+        .error input,
+        .error select {
+            border-color: #ef4444;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="checkout-container px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center space-x-12">
+                    <a href="index.html" class="flex items-center">
+                        <img src="images/logoo.png" alt="TechBazaar Logo"
+                            class="w-20 h-20 object-contain -my-4 scale-150">
+                    </a>
+                    <div class="hidden md:flex items-center space-x-6 text-sm">
+                        <a href="#" class="text-gray-600 hover:text-orange-600">
+                            <i class="fas fa-phone-alt mr-1"></i> Support
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-orange-600">
+                            <i class="fas fa-question-circle mr-1"></i> Help
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="hidden sm:flex items-center space-x-2 text-sm text-gray-600">
+                        <i class="fas fa-lock"></i>
+                        <span>Secure Checkout</span>
+                    </div>
+                    <a href="cart.html" class="flex items-center space-x-2 text-gray-700 hover:text-orange-600">
+                        <div class="relative">
+                            <i class="fas fa-shopping-cart text-lg"></i>
+                            <span id="cartCount"
+                                class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        </div>
+                        <span class="hidden sm:inline">Cart</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <section class="bg-white border-b">
+        <div class="checkout-container px-4">
+            <div class="py-6">
+                <div class="flex items-center justify-between max-w-2xl mx-auto">
+                    <div class="flex items-center">
+                        <div
+                            class="progress-step completed w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        <div class="ml-3">
+                            <div class="text-sm font-medium text-gray-900">Cart</div>
+                            <div class="text-xs text-gray-500">Review items</div>
+                        </div>
+                    </div>
+
+                    <div class="flex-1 h-1 bg-green-500 mx-4"></div>
+
+                    <div class="flex items-center">
+                        <div
+                            class="progress-step active w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium">
+                            2
+                        </div>
+                        <div class="ml-3">
+                            <div class="text-sm font-medium text-gray-900">Information</div>
+                            <div class="text-xs text-gray-500">Shipping & payment</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Checkout Content -->
+    <main class="checkout-container px-4 py-8">
+        <form id="checkoutForm" novalidate>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Column - Checkout Forms -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Contact Information -->
+                    <div class="bg-white rounded-xl shadow-sm border p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-xl font-bold text-gray-900">Contact Information</h2>
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-user"></i>
+                                <span>Already have an account? <a href="#" class="text-orange-600 hover:underline">Log
+                                        in</a></span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address
+                                    *</label>
+                                <input type="email" id="email" name="email" required
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500 transition-colors"
+                                    aria-describedby="email-error">
+                                <p class="text-xs text-gray-500 mt-1">Order confirmation will be sent to this email</p>
+                                <div id="email-error" class="error-message text-red-500 text-xs mt-1"></div>
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number
+                                    *</label>
+                                <input type="tel" id="phone" name="phone" required
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500 transition-colors"
+                                    aria-describedby="phone-error">
+                                <p class="text-xs text-gray-500 mt-1">For delivery updates</p>
+                                <div id="phone-error" class="error-message text-red-500 text-xs mt-1"></div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" id="newsletter"
+                                    class="rounded border-gray-300 text-orange-600 focus:ring-orange-500">
+                                <span class="ml-2 text-sm text-gray-600">Email me with news and offers</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Address -->
+                    <div class="bg-white rounded-xl shadow-sm border p-6">
+                        <h2 class="text-xl font-bold text-gray-900 mb-6">Shipping Address</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First Name
+                                    *</label>
+                                <input type="text" id="firstName" name="firstName" required
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500 transition-colors"
+                                    aria-describedby="firstName-error">
+                                <div id="firstName-error" class="error-message text-red-500 text-xs mt-1"></div>
+                            </div>
+                            <div>
+                                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name
+                                    *</label>
+                                <input type="text" id="lastName" name="lastName" required
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500 transition-colors"
+                                    aria-describedby="lastName-error">
+                                <div id="lastName-error" class="error-message text-red-500 text-xs mt-1"></div>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Street Address
+                                    *</label>
+                                <input type="text" id="address" name="address" required
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500 transition-colors"
+                                    aria-describedby="address-error">
+                                <div id="address-error" class="error-message text-red-500 text-xs mt-1"></div>
+                            </div>
+                            <div>
+                                <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City *</label>
+                                <input type="text" id="city" name="city" required
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500 transition-colors"
+                                    aria-describedby="city-error">
+                                <div id="city-error" class="error-message text-red-500 text-xs mt-1"></div>
+                            </div>
+                            <div>
+                                <label for="state" class="block text-sm font-medium text-gray-700 mb-1">State *</label>
+                                <select id="state" name="state" required
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500 transition-colors"
+                                    aria-describedby="state-error">
+                                    <option value="">Select State</option>
+                                    <option value="MH">Maharashtra</option>
+                                    <option value="DL">Delhi</option>
+                                    <option value="KA">Karnataka</option>
+                                    <option value="TN">Tamil Nadu</option>
+                                    <option value="UP">Uttar Pradesh</option>
+                                    <option value="GJ">Gujarat</option>
+                                    <option value="RJ">Rajasthan</option>
+                                    <option value="WB">West Bengal</option>
+                                </select>
+                                <div id="state-error" class="error-message text-red-500 text-xs mt-1"></div>
+                            </div>
+                            <div>
+                                <label for="pincode" class="block text-sm font-medium text-gray-700 mb-1">PIN Code
+                                    *</label>
+                                <input type="text" id="pincode" name="pincode" required
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500 transition-colors"
+                                    aria-describedby="pincode-error">
+                                <div id="pincode-error" class="error-message text-red-500 text-xs mt-1"></div>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="landmark" class="block text-sm font-medium text-gray-700 mb-1">Landmark
+                                    (Optional)</label>
+                                <input type="text" id="landmark" name="landmark"
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500 transition-colors">
+                                <p class="text-xs text-gray-500 mt-1">Nearby famous place or building</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Method -->
+                    <div class="bg-white rounded-xl shadow-sm border p-6">
+                        <h2 class="text-xl font-bold text-gray-900 mb-6">Shipping Method</h2>
+                        <div class="space-y-4">
+                            <label
+                                class="flex items-center justify-between p-4 border-2 border-orange-500 rounded-lg cursor-pointer bg-orange-50">
+                                <div class="flex items-center">
+                                    <input type="radio" name="shipping" value="standard"
+                                        class="text-orange-600 focus:ring-orange-500" checked>
+                                    <div class="ml-4">
+                                        <span class="font-semibold text-gray-900">Standard Delivery</span>
+                                        <p class="text-sm text-gray-600 mt-1">3-5 business days</p>
+                                    </div>
+                                </div>
+                                <span class="font-semibold text-green-600">FREE</span>
+                            </label>
+                            <label
+                                class="flex items-center justify-between p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-orange-400 transition-colors">
+                                <div class="flex items-center">
+                                    <input type="radio" name="shipping" value="express"
+                                        class="text-orange-600 focus:ring-orange-500">
+                                    <div class="ml-4">
+                                        <span class="font-semibold text-gray-900">Express Delivery</span>
+                                        <p class="text-sm text-gray-600 mt-1">1-2 business days • Get it by tomorrow</p>
+                                    </div>
+                                </div>
+                                <span class="font-semibold text-gray-900">₹199</span>
+                            </label>
+                            <label
+                                class="flex items-center justify-between p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-orange-400 transition-colors">
+                                <div class="flex items-center">
+                                    <input type="radio" name="shipping" value="same-day"
+                                        class="text-orange-600 focus:ring-orange-500">
+                                    <div class="ml-4">
+                                        <span class="font-semibold text-gray-900">Same Day Delivery</span>
+                                        <p class="text-sm text-gray-600 mt-1">Order within 4 hours • Today by 10 PM</p>
+                                    </div>
+                                </div>
+                                <span class="font-semibold text-gray-900">₹399</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="bg-white rounded-xl shadow-sm border p-6">
+                        <h2 class="text-xl font-bold text-gray-900 mb-6">Payment Method</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="payment-card border-2 border-orange-500 rounded-lg p-4 cursor-pointer selected">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-6 bg-blue-600 rounded flex items-center justify-center">
+                                            <i class="fas fa-credit-card text-white text-xs"></i>
+                                        </div>
+                                        <span class="font-semibold">Credit/Debit Card</span>
+                                    </div>
+                                    <div class="flex space-x-1">
+                                        <div class="w-8 h-5 bg-blue-900 rounded"></div>
+                                        <div class="w-8 h-5 bg-red-600 rounded"></div>
+                                        <div class="w-8 h-5 bg-yellow-400 rounded"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="payment-card border border-gray-300 rounded-lg p-4 cursor-pointer hover:border-orange-400">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-6 bg-purple-600 rounded flex items-center justify-center">
+                                        <i class="fas fa-mobile-alt text-white text-xs"></i>
+                                    </div>
+                                    <span class="font-semibold">UPI</span>
+                                </div>
+                            </div>
+                            <div
+                                class="payment-card border border-gray-300 rounded-lg p-4 cursor-pointer hover:border-orange-400">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-6 bg-green-600 rounded flex items-center justify-center">
+                                        <i class="fas fa-university text-white text-xs"></i>
+                                    </div>
+                                    <span class="font-semibold">Net Banking</span>
+                                </div>
+                            </div>
+                            <div
+                                class="payment-card border border-gray-300 rounded-lg p-4 cursor-pointer hover:border-orange-400">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-6 bg-gray-600 rounded flex items-center justify-center">
+                                        <i class="fas fa-money-bill-wave text-white text-xs"></i>
+                                    </div>
+                                    <span class="font-semibold">Cash on Delivery</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="cardDetails" class="mt-6 p-4 bg-gray-50 rounded-lg">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="md:col-span-2">
+                                    <label for="cardNumber" class="block text-sm font-medium text-gray-700 mb-1">Card
+                                        Number</label>
+                                    <input type="text" id="cardNumber" name="cardNumber"
+                                        placeholder="1234 5678 9012 3456"
+                                        class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500"
+                                        aria-describedby="cardNumber-error">
+                                    <div id="cardNumber-error" class="error-message text-red-500 text-xs mt-1"></div>
+                                </div>
+                                <div>
+                                    <label for="expiryDate" class="block text-sm font-medium text-gray-700 mb-1">Expiry
+                                        Date</label>
+                                    <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY"
+                                        class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500"
+                                        aria-describedby="expiryDate-error">
+                                    <div id="expiryDate-error" class="error-message text-red-500 text-xs mt-1"></div>
+                                </div>
+                                <div>
+                                    <label for="cvv" class="block text-sm font-medium text-gray-700 mb-1">CVV</label>
+                                    <input type="text" id="cvv" name="cvv" placeholder="123"
+                                        class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500"
+                                        aria-describedby="cvv-error">
+                                    <div id="cvv-error" class="error-message text-red-500 text-xs mt-1"></div>
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label for="cardName" class="block text-sm font-medium text-gray-700 mb-1">Name on
+                                        Card</label>
+                                    <input type="text" id="cardName" name="cardName" placeholder="John Doe"
+                                        class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500"
+                                        aria-describedby="cardName-error">
+                                    <div id="cardName-error" class="error-message text-red-500 text-xs mt-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+                        <a href="cart.html"
+                            class="flex items-center space-x-2 text-gray-600 hover:text-orange-600 transition-colors">
+                            <i class="fas fa-arrow-left"></i>
+                            <span>Return to cart</span>
+                        </a>
+                        <button type="submit" id="placeOrderBtn"
+                            class="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl w-full sm:w-auto">
+                            <i class="fas fa-lock mr-2"></i> Place Order
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column - Order Summary -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl shadow-sm border sticky top-4">
+                        <div class="p-6 border-b">
+                            <h3 class="text-lg font-bold text-gray-900 mb-4">Order Summary</h3>
+                            <div id="orderItems" class="space-y-4 max-h-96 overflow-y-auto"></div>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Subtotal</span>
+                                <span id="subtotal" class="font-medium">₹0</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Shipping</span>
+                                <span id="shippingCost" class="font-medium text-green-600">FREE</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Tax</span>
+                                <span id="taxAmount" class="font-medium">₹0</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Discount</span>
+                                <span id="discount" class="font-medium text-green-600">-₹0</span>
+                            </div>
+                            <div class="border-t pt-3">
+                                <div class="flex justify-between text-lg font-bold">
+                                    <span>Total</span>
+                                    <span id="totalAmount" class="text-orange-600">₹0</span>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">Inclusive of all taxes</p>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-b-xl">
+                            <div class="space-y-3">
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-shield-alt text-green-500"></i>
+                                    <span>Secure SSL Encryption</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-undo text-blue-500"></i>
+                                    <span>30-Day Return Policy</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-truck text-purple-500"></i>
+                                    <span>Free Shipping over ₹10,000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div class="lg:pr-4 mb-10 lg:mr-16">
+                    <div class="flex items-center mb-6">
+                        <img src="images/logoo bg.png" alt="Kunash Enterprises" class="h-10">
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Your trusted partner for laptops and accessories since 2010. We provide quality products with
+                        exceptional service.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="mr-8">
+                    <h3 class="text-xl font-semibold mb-6 pb-2 border-b-2 border-orange-500 inline-block">Quick Links
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center"><i
+                                    class="fas fa-chevron-right text-orange-500 text-xs mr-2"></i> Home</a></li>
+                        <li><a href="products.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center"><i
+                                    class="fas fa-chevron-right text-orange-500 text-xs mr-2"></i> Products</a></li>
+                        <li><a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center"><i
+                                    class="fas fa-chevron-right text-orange-500 text-xs mr-2"></i> Services</a></li>
+                        <li><a href="about.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center"><i
+                                    class="fas fa-chevron-right text-orange-500 text-xs mr-2"></i> About Us</a></li>
+                        <li><a href="contact.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center"><i
+                                    class="fas fa-chevron-right text-orange-500 text-xs mr-2"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 pb-2 border-b-2 border-orange-500 inline-block">Our Services
+                    </h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center">
+                                <i class="fas fa-check-circle text-orange-500 text-sm mr-2"></i> Laptop/Desktop Repair
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center">
+                                <i class="fas fa-check-circle text-orange-500 text-sm mr-2"></i> Buyback of Old Laptops
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center">
+                                <i class="fas fa-check-circle text-orange-500 text-sm mr-2"></i> Accessories Supply
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center">
+                                <i class="fas fa-check-circle text-orange-500 text-sm mr-2"></i> Maintenance & Support
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center">
+                                <i class="fas fa-check-circle text-orange-500 text-sm mr-2"></i> Data Security Services
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 pb-2 border-b-2 border-orange-500 inline-block">Contact Us
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="bg-orange-500 p-2 rounded-full mr-3 mt-1">
+                                <i class="fas fa-map-marker-alt text-white text-sm"></i>
+                            </div>
+                            <span class="text-gray-400">Vishwa - Parvati Building, Bijali Nagar, Chinchwad, Pune,
+                                Maharashtra 411033</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="bg-orange-500 p-2 rounded-full mr-3">
+                                <i class="fas fa-phone-alt text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <a href="tel:+912345678900"
+                                    class="text-gray-400 hover:text-orange-500 transition-colors duration-300">9370812640</a>
+                                <p class="text-gray-500 text-sm">Mon-Sat: 10AM-7PM</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="bg-orange-500 p-2 rounded-full mr-3">
+                                <i class="fas fa-envelope text-white text-sm"></i>
+                            </div>
+                            <a href="mailto:info@kunashenterprises.com"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300">info@kunashenterprises.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <!-- Paragraph (moved slightly right) -->
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0 pl-6">
+                        &copy; 2025 - Kunash Enterprises. All rights reserved.
+                    </p>
+
+                    <!-- Link (moved slightly left) -->
+                    <div class="flex space-x-6 pr-6">
+                        <a href="#" class="text-gray-500 hover:text-orange-500 text-sm transition-colors duration-300">
+                            Developed by ~ Ms. Prerna Patil
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Redirect to order-confirmation page when "Place Order" button is clicked
+        document.getElementById("placeOrderBtn").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent default form submission if inside a form
+            window.location.href = "order-confirmation.html"; // Redirect to confirmation page
+        });
+    </script>
+    <script src="checkout.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Kunash Enterprises</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(to right, #f97316, #ea580c);
+            width: 0%;
+            z-index: 40;
+            transition: width 0.2s;
+        }
+
+        .dark-mode {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+
+        .dark-mode .bg-white {
+            background-color: #2d3748;
+        }
+
+        .dark-mode .text-gray-700,
+        .dark-mode .text-gray-800 {
+            color: #e2e8f0;
+        }
+
+        .dark-mode .text-gray-600 {
+            color: #cbd5e0;
+        }
+
+        header {
+            position: sticky;
+            position: -webkit-sticky;
+            top: 0;
+            z-index: 50;
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .dark-mode header {
+            background-color: #2d3748;
+        }
+
+        #mobileMenu {
+            top: 100%;
+        }
+
+        .bg-orange-50 {
+            background-color: #fff7ed;
+        }
+
+        .bg-orange-100 {
+            background-color: #ffedd5;
+        }
+
+        .bg-orange-500 {
+            background-color: #f97316;
+        }
+
+        .bg-orange-600 {
+            background-color: #ea580c;
+        }
+
+        .text-orange-500 {
+            color: #f97316;
+        }
+
+        .text-orange-600 {
+            color: #ea580c;
+        }
+
+        .border-orange-500 {
+            border-color: #f97316;
+        }
+
+        .hover\:bg-orange-600:hover {
+            background-color: #ea580c;
+        }
+
+        .hover\:text-orange-600:hover {
+            color: #ea580c;
+        }
+
+        .input-icon {
+            transition: all 0.3s ease;
+        }
+
+        .input-icon:hover {
+            transform: translateY(-2px);
+        }
+
+        .floating {
+            position: absolute;
+            animation: floating 7s ease-in-out infinite;
+            opacity: 0.75;
+        }
+
+        @keyframes floating {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(12px, -15px) rotate(6deg);
+            }
+
+            50% {
+                transform: translate(-14px, 10px) rotate(-6deg);
+            }
+
+            75% {
+                transform: translate(8px, 15px) rotate(4deg);
+            }
+        }
+
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-600 {
+            animation-delay: 0.6s;
+        }
+
+        .delay-800 {
+            animation-delay: 0.8s;
+        }
+    </style>
+</head>
+
+<body class="bg-orange-50">
+    <!-- Progress Bar -->
+    <div class="progress-bar"></div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop"
+        class="fixed bottom-5 right-5 bg-orange-600 text-white p-3 rounded-full shadow-lg opacity-0 transition-opacity duration-300 z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50">
+        <div class="bg-gray-900 text-white py-2">
+            <div class="container mx-auto px-4 flex justify-between items-center">
+                <div class="text-sm font-medium flex items-center space-x-2">
+                    <i class="far fa-clock text-orange-400"></i>
+                    <span>Business Hours: 10 AM - 7 PM</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="mailto:info@kunashenterprises.com"
+                        class="text-sm hover:text-orange-400 flex items-center space-x-1">
+                        <i class="fas fa-envelope text-orange-400"></i>
+                        <span>info@kunashenterprises.com</span>
+                    </a>
+                    <span class="h-4 w-px bg-gray-600"></span>
+                    <a href="tel:+1234567890" class="text-sm hover:text-orange-400 flex items-center space-x-1">
+                        <i class="fas fa-phone-alt text-orange-400"></i>
+                        <span>+91 93708 12640</span>
+                    </a>
+                    <span class="h-4 w-px bg-gray-600"></span>
+                    <div class="flex space-x-3">
+                        <a href="https://facebook.com" target="_blank" class="hover:text-orange-400">
+                            <i class="fab fa-facebook-f text-orange-400"></i>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" class="hover:text-orange-400">
+                            <i class="fab fa-twitter text-orange-400"></i>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="hover:text-orange-400">
+                            <i class="fab fa-instagram text-orange-400"></i>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="hover:text-orange-400">
+                            <i class="fab fa-linkedin-in text-orange-400"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white shadow-md">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="images/logoo.png" alt="Kunash Enterprises" class="w-32 md:w-40 lg:w-48 object-contain">
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-orange-600 font-medium">Home</a>
+                    <a href="products.html" class="text-gray-700 hover:text-orange-600">Products</a>
+                    <a href="services.html" class="text-gray-700 hover:text-orange-600">Services</a>
+                    <a href="about.html" class="text-gray-700 hover:text-orange-600">About</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-orange-600">Contact</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <div class="relative" id="userProfileDropdown">
+                        <button id="userMenuButton"
+                            class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+                            <i class="fas fa-user text-gray-700"></i>
+                        </button>
+                        <div id="guestMenu"
+                            class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden border border-gray-200">
+                            <a href="login.html"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-orange-600">
+                                <i class="fas fa-sign-in-alt mr-2"></i>Login
+                            </a>
+                            <a href="signup.html"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-orange-600">
+                                <i class="fas fa-user-plus mr-2"></i>Sign Up
+                            </a>
+                        </div>
+                        <div id="userMenu"
+                            class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden border border-gray-200">
+                            <div class="px-4 py-2 border-b text-sm">
+                                <p class="font-medium text-gray-800">Hello, User!</p>
+                                <p class="text-xs text-gray-500">user@example.com</p>
+                            </div>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-orange-600">
+                                <i class="fas fa-shopping-cart mr-2"></i>Cart
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-orange-600">
+                                <i class="fas fa-heart mr-2"></i>Wishlist
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-orange-600">
+                                <i class="fas fa-cog mr-2"></i>Account Settings
+                            </a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-orange-600"
+                                id="logoutButton">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                            </a>
+                        </div>
+                    </div>
+                    <button id="mobileMenuButton" class="md:hidden text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="mobileMenu" class="hidden md:hidden bg-white py-4 px-4 absolute w-full shadow-lg">
+                <a href="index.html" class="block py-2 text-orange-600 font-medium">Home</a>
+                <a href="products.html" class="block py-2 text-gray-700 hover:text-orange-600">Products</a>
+                <a href="services.html" class="block py-2 text-gray-700 hover:text-orange-600">Services</a>
+                <a href="about.html" class="block py-2 text-gray-700 hover:text-orange-600">About</a>
+                <a href="contact.html" class="block py-2 text-gray-700 hover:text-orange-600">Contact</a>
+                <div class="border-t mt-2 pt-2">
+                    <a href="login.html" class="block py-2 text-gray-700 hover:text-orange-600">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Login
+                    </a>
+                    <a href="signup.html" class="block py-2 text-gray-700 hover:text-orange-600">
+                        <i class="fas fa-user-plus mr-2"></i>Sign Up
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <section class="relative py-16 bg-orange-50 overflow-hidden">
+        <!-- Floating Icons -->
+        <div class="absolute inset-0 pointer-events-none">
+            <i class="fas fa-laptop text-5xl text-orange-500 floating" style="top:10%; left:5%;"></i>
+            <i class="fas fa-keyboard text-4xl text-orange-600 floating delay-400" style="top:70%; left:8%;"></i>
+            <i class="fas fa-desktop text-5xl text-orange-500 floating delay-600" style="top:15%; right:5%;"></i>
+            <i class="fas fa-mouse text-4xl text-orange-400 floating delay-800" style="top:60%; right:8%;"></i>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <div
+                class="max-w-md mx-auto bg-white rounded-lg shadow-xl overflow-hidden transform transition-all hover:shadow-2xl">
+                <div class="bg-gradient-to-r from-orange-500 to-orange-700 py-6 text-center">
+                    <h2 class="text-3xl font-bold text-white">Login to Your Account</h2>
+                    <p class="text-white text-sm mt-2">Access exclusive deals and manage your orders</p>
+                </div>
+                <div class="p-8">
+                    <form id="loginForm" class="space-y-6">
+                        <div class="relative">
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email
+                                Address</label>
+                            <div class="flex items-center input-icon">
+                                <i class="fas fa-envelope text-orange-600 mr-3"></i>
+                                <input type="email" id="email" name="email" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500 transition-all"
+                                    placeholder="Enter your email" aria-describedby="email-error">
+                            </div>
+                            <p id="email-error" class="text-red-500 text-sm mt-1 hidden">Please enter a valid email</p>
+                        </div>
+                        <div class="relative">
+                            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                            <div class="flex items-center input-icon">
+                                <i class="fas fa-lock text-orange-600 mr-3"></i>
+                                <input type="password" id="password" name="password" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500 transition-all"
+                                    placeholder="Enter your password">
+                                <button type="button" id="togglePassword" class="absolute right-3 text-gray-500">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="remember" name="remember"
+                                    class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded">
+                                <label for="remember" class="ml-2 block text-sm text-gray-700">Remember me</label>
+                            </div>
+                            <a href="forgot-password.html" class="text-sm text-orange-600 hover:text-orange-500">Forgot
+                                password?</a>
+                        </div>
+                        <div>
+                            <button type="submit"
+                                class="w-full bg-orange-600 text-white py-3 px-4 rounded-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-all">
+                                Sign In
+                            </button>
+                        </div>
+                    </form>
+                    <div class="mt-6 text-center">
+                        <p class="text-sm text-gray-600">
+                            Don't have an account?
+                            <a href="signup.html" class="font-medium text-orange-600 hover:text-orange-500">Sign up
+                                here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div class="lg:pr-4 mb-10 lg:mr-16">
+                    <div class="flex items-center mb-6">
+                        <img src="images/logoo bg.png" alt="Kunash Enterprises" class="h-10">
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Your trusted partner for laptops and accessories since 2010. We provide quality products with
+                        exceptional service.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="mr-8">
+                    <h3 class="text-xl font-semibold mb-6 pb-2 border-b-2 border-orange-500 inline-block">Quick Links
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center"><i
+                                    class="fas fa-chevron-right text-orange-500 text-xs mr-2"></i> Home</a></li>
+                        <li><a href="products.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center"><i
+                                    class="fas fa-chevron-right text-orange-500 text-xs mr-2"></i> Products</a></li>
+                        <li><a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center"><i
+                                    class="fas fa-chevron-right text-orange-500 text-xs mr-2"></i> Services</a></li>
+                        <li><a href="about.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center"><i
+                                    class="fas fa-chevron-right text-orange-500 text-xs mr-2"></i> About Us</a></li>
+                        <li><a href="contact.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center"><i
+                                    class="fas fa-chevron-right text-orange-500 text-xs mr-2"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 pb-2 border-b-2 border-orange-500 inline-block">Our Services
+                    </h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center">
+                                <i class="fas fa-check-circle text-orange-500 text-sm mr-2"></i> Laptop/Desktop Repair
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center">
+                                <i class="fas fa-check-circle text-orange-500 text-sm mr-2"></i> Buyback of Old Laptops
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center">
+                                <i class="fas fa-check-circle text-orange-500 text-sm mr-2"></i> Accessories Supply
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center">
+                                <i class="fas fa-check-circle text-orange-500 text-sm mr-2"></i> Maintenance & Support
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center">
+                                <i class="fas fa-check-circle text-orange-500 text-sm mr-2"></i> Data Security Services
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 pb-2 border-b-2 border-orange-500 inline-block">Contact Us
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="bg-orange-500 p-2 rounded-full mr-3 mt-1">
+                                <i class="fas fa-map-marker-alt text-white text-sm"></i>
+                            </div>
+                            <span class="text-gray-400">Vishwa - Parvati Building, Bijali Nagar, Chinchwad, Pune,
+                                Maharashtra 411033</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="bg-orange-500 p-2 rounded-full mr-3">
+                                <i class="fas fa-phone-alt text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <a href="tel:+912345678900"
+                                    class="text-gray-400 hover:text-orange-500 transition-colors duration-300">9370812640</a>
+                                <p class="text-gray-500 text-sm">Mon-Sat: 10AM-7PM</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="bg-orange-500 p-2 rounded-full mr-3">
+                                <i class="fas fa-envelope text-white text-sm"></i>
+                            </div>
+                            <a href="mailto:info@kunashenterprises.com"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300">info@kunashenterprises.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <!-- Paragraph (moved slightly right) -->
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0 pl-6">
+                        &copy; 2025 - Kunash Enterprises. All rights reserved.
+                    </p>
+
+                    <!-- Link (moved slightly left) -->
+                    <div class="flex space-x-6 pr-6">
+                        <a href="#" class="text-gray-500 hover:text-orange-500 text-sm transition-colors duration-300">
+                            Developed by ~ Ms. Prerna Patil
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Live Chat Button -->
+    <a href="https://wa.me/9370812640" target="_blank">
+        <div class="fixed bottom-5 left-5 bg-green-500 text-white p-3 rounded-full shadow-lg z-50 cursor-pointer">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </div>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let menuOpen = false;
+
+        mobileMenuButton.addEventListener('click', () => {
+            if (menuOpen) {
+                mobileMenu.classList.add('hidden');
+                mobileMenuButton.innerHTML = '<i class="fas fa-bars text-xl"></i>';
+            } else {
+                mobileMenu.classList.remove('hidden');
+                mobileMenuButton.innerHTML = '<i class="fas fa-times text-xl"></i>';
+            }
+            menuOpen = !menuOpen;
+        });
+
+        // Scroll Progress Bar
+        window.onscroll = function () {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.querySelector('.progress-bar').style.width = scrolled + '%';
+
+            const backToTop = document.getElementById('backToTop');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                backToTop.classList.remove('opacity-0');
+                backToTop.classList.add('opacity-100');
+            } else {
+                backToTop.classList.remove('opacity-100');
+                backToTop.classList.add('opacity-0');
+            }
+        };
+
+        // Back to top functionality
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Toggle dropdown menu on click
+        document.getElementById('userMenuButton').addEventListener('click', function (e) {
+            e.stopPropagation();
+            const guestMenu = document.getElementById('guestMenu');
+            const userMenu = document.getElementById('userMenu');
+            guestMenu.classList.toggle('hidden');
+            userMenu.classList.add('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('#userProfileDropdown')) {
+                document.getElementById('guestMenu').classList.add('hidden');
+                document.getElementById('userMenu').classList.add('hidden');
+            }
+        });
+
+        // Password visibility toggle
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            togglePassword.querySelector('i').classList.toggle('fa-eye');
+            togglePassword.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+
+        // Login form submission
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const emailError = document.getElementById('email-error');
+
+            // Basic email validation
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                emailError.classList.remove('hidden');
+                return;
+            } else {
+                emailError.classList.add('hidden');
+            }
+
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Simulate login process
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userEmail', email);
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+
+</html>

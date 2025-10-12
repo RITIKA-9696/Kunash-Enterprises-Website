@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kunash - Sign Up & Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            position: relative;
+            width: 850px;
+            height: 550px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .forms-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        /* Show only one form at a time */
+        .signin-form {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+
+        .signup-form {
+            opacity: 1;
+            pointer-events: auto;
+            transition: opacity 0.6s ease;
+        }
+
+        .container.sign-up-mode .signin-form {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .container.sign-up-mode .signup-form {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .container .form {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 20px 40px;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .container .form::-webkit-scrollbar {
+            width: 6px;
+        }
+        .container .form::-webkit-scrollbar-thumb {
+            background: rgba(26, 42, 108, 0.4);
+            border-radius: 10px;
+        }
+
+        .logo {
+            margin-bottom: 15px;
+            color: #1a2a6c;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .logo span {
+            color: #fdbb2d;
+        }
+
+        .form h2 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .form .input-box {
+            position: relative;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .form .input-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            outline: none;
+            background: #f5f5f5;
+            border-radius: 30px;
+            font-size: 16px;
+            color: #333;
+            padding-left: 45px;
+            transition: all 0.3s ease;
+        }
+
+        .form .input-box input:focus {
+            box-shadow: 0 0 10px rgba(26, 42, 108, 0.3);
+        }
+
+        .form .input-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 18px;
+        }
+
+        .form .remember-forgot {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .form .remember-forgot label {
+            display: flex;
+            align-items: center;
+            color: #555;
+        }
+
+        .form .remember-forgot a {
+            color: #1a2a6c;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .form .remember-forgot a:hover {
+            color: #fdbb2d;
+            text-decoration: underline;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(178, 31, 31, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(178, 31, 31, 0.6);
+        }
+
+        .form .social-text {
+            margin: 10px 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .form .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .form .social-icons a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .form .social-icons a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .panels-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            overflow: hidden;
+            z-index: 100;
+        }
+
+        .container:before {
+            content: "";
+            position: absolute;
+            width: 2000px;
+            height: 2000px;
+            border-radius: 45%;
+            background: linear-gradient(45deg, #1a2a6c, #fdbb2d);
+            top: -10%;
+            right: 48%;
+            transform: translateY(-80%);
+            z-index: 6;
+            transition: transform 1.8s ease-in-out;
+        }
+
+        .container.sign-up-mode:before {
+            transform: translate(100%, -50%) rotate(90deg);
+            right: 52%;
+        }
+
+        .panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            width: 50%;
+            padding: 0 40px;
+            text-align: center;
+            color: white;
+            z-index: 6;
+        }
+
+        .left-panel {
+            pointer-events: all;
+            padding: 80px 40px 80px 20px;
+        }
+
+        .right-panel {
+            pointer-events: none;
+            padding: 80px 20px 80px 40px;
+            opacity: 0;
+        }
+
+        .container.sign-up-mode .left-panel {
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .container.sign-up-mode .right-panel {
+            pointer-events: all;
+            opacity: 1;
+        }
+
+        .panel .btn.transparent {
+            margin: 0;
+            background: transparent;
+            border: 2px solid white;
+            width: 150px;
+            box-shadow: none;
+        }
+
+        .panel .btn.transparent:hover {
+            background: white;
+            color: #1a2a6c;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                width: 90%;
+                height: auto;
+                margin: 50px 0;
+            }
+
+            .panel {
+                display: none;
+            }
+
+            .container:before {
+                display: none;
+            }
+
+            .container .forms-container {
+                flex-direction: column;
+            }
+
+            .container.sign-up-mode .forms-container {
+                transform: translateY(-100%);
+            }
+
+            .container .form {
+                padding: 30px;
+                border-radius: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="forms-container">
+            <!-- Sign In Form -->
+            <div class="form signin-form">
+                <div class="logo">Kuna<span>sh</span></div>
+                <h2>Welcome Back</h2>
+                <div class="input-box">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Username or Email">
+                </div>
+                <div class="input-box">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Password">
+                </div>
+                <div class="remember-forgot">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button class="btn">Sign In</button>
+                <div class="social-text">Or sign in with social platforms</div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-google"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <!-- Sign Up Form -->
+            <div class="form signup-form">
+                <div class="logo">Kuna<span>sh</span></div>
+                <h2>Create Account</h2>
+                <div class="input-box">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Username">
+                </div>
+                <div class="input-box">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="Email">
+                </div>
+                <div class="input-box">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Password">
+                </div>
+                <div class="input-box">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Confirm Password">
+                </div>
+                <div class="remember-forgot">
+                    <label>
+                        <input type="checkbox"> I agree to the terms & conditions
+                    </label>
+                </div>
+                <button class="btn">Sign Up</button>
+                <div class="social-text">Or sign up with social platforms</div>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-google"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="panels-container">
+            <!-- Left Panel (Shows Sign-Up Call) -->
+            <div class="panel left-panel">
+                <div class="content">
+                    <h3>New to Kunash?</h3>
+                    <p>Join our community and discover a world of possibilities. Create an account to get started!</p>
+                    <button class="btn transparent" id="sign-up-btn">Sign In</button>
+                </div>
+            </div>
+
+            <!-- Right Panel (Shows Sign-In Call) -->
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>Already with us?</h3>
+                    <p>Welcome back! We're thrilled to see you again. Sign in to continue your journey.</p>
+                    <button class="btn transparent" id="sign-in-btn">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const signUpBtn = document.getElementById('sign-up-btn');
+        const signInBtn = document.getElementById('sign-in-btn');
+        const container = document.querySelector('.container');
+
+        signUpBtn.addEventListener('click', () => {
+            container.classList.add('sign-up-mode');
+        });
+
+        signInBtn.addEventListener('click', () => {
+            container.classList.remove('sign-up-mode');
+        });
+    </script>
+</body>
+</html>

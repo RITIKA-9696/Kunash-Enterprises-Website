@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - Kunash Enterprises</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .confirmation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .success-animation {
+            animation: successScale 0.6s ease-in-out;
+        }
+
+        @keyframes successScale {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            70% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .order-item:hover {
+            background-color: #f8fafc;
+        }
+
+        .tracking-progress {
+            background: linear-gradient(90deg, #10b981 0%, #10b981 var(--progress, 0%), #e5e7eb var(--progress, 0%), #e5e7eb 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <!-- <header class="bg-white shadow-sm border-b">
+        <div class="confirmation-container px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="flex items-center">
+    <img src="images/logoo.png" alt="KE Logo" class="w-12 h-12 object-contain transform scale-150">
+</a>
+
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2 text-sm text-gray-600">
+                        <i class="fas fa-user"></i>
+                        <span>Welcome back!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header> -->
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="checkout-container px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center space-x-12 pl-6 md:pl-8">
+                    <a href="index.html" class="flex items-center">
+                        <img src="images/logoo.png" alt="TechBazaar Logo"
+                            class="w-20 h-20 object-contain -my-4 scale-150">
+                    </a>
+                    <div class="hidden md:flex items-center space-x-6 text-sm">
+                        <a href="#" class="text-gray-600 hover:text-orange-600">
+                            <i class="fas fa-phone-alt mr-1"></i> Support
+                        </a>
+                        <a href="#" class="text-gray-600 hover:text-orange-600">
+                            <i class="fas fa-question-circle mr-1"></i> Help
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2 text-sm text-gray-600">
+                        <i class="fas fa-user"></i>
+                        <span>Welcome back!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Main Content -->
+    <main class="confirmation-container px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Success Header -->
+            <div class="text-center mb-12">
+                <div
+                    class="success-animation w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-check text-white text-2xl"></i>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">Order Confirmed!</h1>
+                <p class="text-xl text-gray-600 mb-2">Thank you for your purchase</p>
+                <p class="text-gray-500">Order ID: <span id="orderId"
+                        class="font-mono font-semibold">KE-123456789</span></p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Column - Order Details -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Order Summary -->
+                    <div class="bg-white rounded-xl shadow-sm border p-6">
+                        <h2 class="text-xl font-bold text-gray-900 mb-6">Order Summary</h2>
+
+                        <div id="orderItems" class="space-y-4 mb-6">
+                            <!-- Order items will be loaded here -->
+                        </div>
+
+                        <div class="border-t pt-4 space-y-3">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Subtotal</span>
+                                <span id="subtotal" class="font-medium">₹0</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Shipping</span>
+                                <span id="shippingCost" class="font-medium text-green-600">FREE</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Tax</span>
+                                <span id="taxAmount" class="font-medium">₹0</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Discount</span>
+                                <span id="discount" class="font-medium text-green-600">-₹0</span>
+                            </div>
+                            <div class="border-t pt-3">
+                                <div class="flex justify-between text-lg font-bold">
+                                    <span>Total</span>
+                                    <span id="totalAmount" class="text-green-600">₹0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Information -->
+                    <div class="bg-white rounded-xl shadow-sm border p-6">
+                        <h2 class="text-xl font-bold text-gray-900 mb-6">Shipping Information</h2>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h3 class="font-semibold text-gray-900 mb-3">Shipping Address</h3>
+                                <div id="shippingAddress" class="text-gray-600 space-y-1">
+                                    <!-- Shipping address will be loaded here -->
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3 class="font-semibold text-gray-900 mb-3">Shipping Method</h3>
+                                <div id="shippingMethod" class="text-gray-600">
+                                    <!-- Shipping method will be loaded here -->
+                                </div>
+
+                                <h3 class="font-semibold text-gray-900 mt-4 mb-3">Payment Method</h3>
+                                <div id="paymentMethod" class="text-gray-600">
+                                    <!-- Payment method will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Tracking -->
+                    <div class="bg-white rounded-xl shadow-sm border p-6">
+                        <h2 class="text-xl font-bold text-gray-900 mb-6">Order Tracking</h2>
+
+                        <div class="tracking-progress h-2 rounded-full mb-8" style="--progress: 20%;"></div>
+
+                        <div class="grid grid-cols-4 gap-4 text-center">
+                            <div class="text-center">
+                                <div
+                                    class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <p class="text-sm font-medium text-gray-900">Order Placed</p>
+                                <p class="text-xs text-gray-500" id="orderDate">Today</p>
+                            </div>
+
+                            <div class="text-center">
+                                <div
+                                    class="w-10 h-10 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-box"></i>
+                                </div>
+                                <p class="text-sm font-medium text-gray-500">Processing</p>
+                                <p class="text-xs text-gray-400">Est: 1 day</p>
+                            </div>
+
+                            <div class="text-center">
+                                <div
+                                    class="w-10 h-10 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-shipping-fast"></i>
+                                </div>
+                                <p class="text-sm font-medium text-gray-500">Shipped</p>
+                                <p class="text-xs text-gray-400">Est: 2-3 days</p>
+                            </div>
+
+                            <div class="text-center">
+                                <div
+                                    class="w-10 h-10 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <p class="text-sm font-medium text-gray-500">Delivered</p>
+                                <p class="text-xs text-gray-400">Est: 3-5 days</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Quick Actions -->
+                <div class="space-y-6">
+                    <!-- Order Actions -->
+                    <div class="bg-white rounded-xl shadow-sm border p-6">
+                        <h3 class="font-semibold text-gray-900 mb-4">Order Actions</h3>
+
+                        <div class="space-y-3">
+                            <button onclick="downloadInvoice()"
+                                class="w-full flex items-center justify-center space-x-2 bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-download"></i>
+                                <span>Download Invoice</span>
+                            </button>
+
+                            <button onclick="printOrder()"
+                                class="w-full flex items-center justify-center space-x-2 bg-gray-600 text-white py-3 px-4 rounded-lg hover:bg-gray-700 transition-colors">
+                                <i class="fas fa-print"></i>
+                                <span>Print Order</span>
+                            </button>
+
+                            <button onclick="trackOrder()"
+                                class="w-full flex items-center justify-center space-x-2 bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition-colors">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Track Order</span>
+                            </button>
+
+                            <a href="products.html"
+                                class="block w-full text-center bg-orange-600 text-white py-3 px-4 rounded-lg hover:bg-orange-700 transition-colors">
+                                Continue Shopping
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Support Card -->
+                    <div class="bg-white rounded-xl shadow-sm border p-6">
+                        <h3 class="font-semibold text-gray-900 mb-4">Need Help?</h3>
+
+                        <div class="space-y-3 text-sm text-gray-600">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-phone text-blue-500"></i>
+                                <div>
+                                    <p class="font-medium">Call Support</p>
+                                    <p>1800-123-KUNASH</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-envelope text-green-500"></i>
+                                <div>
+                                    <p class="font-medium">Email Us</p>
+                                    <p>support@kunashenterprises.com</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-comment text-purple-500"></i>
+                                <div>
+                                    <p class="font-medium">Live Chat</p>
+                                    <p>Available 24/7</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Next Steps -->
+                    <div class="bg-blue-50 rounded-xl border border-blue-200 p-6">
+                        <h3 class="font-semibold text-blue-900 mb-3">What's Next?</h3>
+
+                        <div class="space-y-3 text-sm text-blue-800">
+                            <div class="flex items-start space-x-2">
+                                <i class="fas fa-envelope text-blue-500 mt-0.5"></i>
+                                <p>Order confirmation email sent to your registered email</p>
+                            </div>
+
+                            <div class="flex items-start space-x-2">
+                                <i class="fas fa-shipping-fast text-blue-500 mt-0.5"></i>
+                                <p>Shipping updates will be sent via SMS and email</p>
+                            </div>
+
+                            <div class="flex items-start space-x-2">
+                                <i class="fas fa-mobile-alt text-blue-500 mt-0.5"></i>
+                                <p>Track your order anytime from your account</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Timeline -->
+            <div class="bg-white rounded-xl shadow-sm border p-6 mt-8">
+                <h2 class="text-xl font-bold text-gray-900 mb-6">Order Timeline</h2>
+
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-4">
+                        <div
+                            class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-900">Order Confirmed</p>
+                            <p class="text-sm text-gray-600">Your order has been successfully placed and confirmed</p>
+                            <p class="text-xs text-gray-400" id="timelineDate">Just now</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div class="lg:pr-4 mb-10 lg:mr-16">
+                    <div class="flex items-center mb-6">
+                        <img src="images/logoo bg.png" alt="Kunash Enterprises" class="h-10">
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Your trusted partner for laptops and accessories since 2010. We provide quality products with
+                        exceptional service.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="mr-8">
+                    <h3 class="text-xl font-semibold mb-6 pb-2 border-b-2 border-orange-500 inline-block">Quick Links
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center"><i
+                                    class="fas fa-chevron-right text-orange-500 text-xs mr-2"></i> Home</a></li>
+                        <li><a href="products.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center"><i
+                                    class="fas fa-chevron-right text-orange-500 text-xs mr-2"></i> Products</a></li>
+                        <li><a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center"><i
+                                    class="fas fa-chevron-right text-orange-500 text-xs mr-2"></i> Services</a></li>
+                        <li><a href="about.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center"><i
+                                    class="fas fa-chevron-right text-orange-500 text-xs mr-2"></i> About Us</a></li>
+                        <li><a href="contact.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center"><i
+                                    class="fas fa-chevron-right text-orange-500 text-xs mr-2"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 pb-2 border-b-2 border-orange-500 inline-block">Our Services
+                    </h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center">
+                                <i class="fas fa-check-circle text-orange-500 text-sm mr-2"></i> Laptop/Desktop Repair
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center">
+                                <i class="fas fa-check-circle text-orange-500 text-sm mr-2"></i> Buyback of Old Laptops
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center">
+                                <i class="fas fa-check-circle text-orange-500 text-sm mr-2"></i> Accessories Supply
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center">
+                                <i class="fas fa-check-circle text-orange-500 text-sm mr-2"></i> Maintenance & Support
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300 flex items-center">
+                                <i class="fas fa-check-circle text-orange-500 text-sm mr-2"></i> Data Security Services
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 pb-2 border-b-2 border-orange-500 inline-block">Contact Us
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="bg-orange-500 p-2 rounded-full mr-3 mt-1">
+                                <i class="fas fa-map-marker-alt text-white text-sm"></i>
+                            </div>
+                            <span class="text-gray-400">Vishwa - Parvati Building, Bijali Nagar, Chinchwad, Pune,
+                                Maharashtra 411033</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="bg-orange-500 p-2 rounded-full mr-3">
+                                <i class="fas fa-phone-alt text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <a href="tel:+912345678900"
+                                    class="text-gray-400 hover:text-orange-500 transition-colors duration-300">9370812640</a>
+                                <p class="text-gray-500 text-sm">Mon-Sat: 10AM-7PM</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="bg-orange-500 p-2 rounded-full mr-3">
+                                <i class="fas fa-envelope text-white text-sm"></i>
+                            </div>
+                            <a href="mailto:info@kunashenterprises.com"
+                                class="text-gray-400 hover:text-orange-500 transition-colors duration-300">info@kunashenterprises.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <!-- Paragraph (moved slightly right) -->
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0 pl-6">
+                        &copy; 2025 - Kunash Enterprises. All rights reserved.
+                    </p>
+
+                    <!-- Link (moved slightly left) -->
+                    <div class="flex space-x-6 pr-6">
+                        <a href="#" class="text-gray-500 hover:text-orange-500 text-sm transition-colors duration-300">
+                            Developed by ~ Ms. Prerna Patil
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="order-confirmation.js"></script>
+</body>
+
+</html>

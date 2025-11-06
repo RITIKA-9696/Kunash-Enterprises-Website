@@ -146,6 +146,37 @@
         .delay-800 {
             animation-delay: 0.8s;
         }
+
+         /* Continuous Bouncy Logo Animation */
+        .animate-continuous-bounce-logo {
+            animation: bounceLogo 1.5s ease-in-out infinite;
+        }
+
+        @keyframes bounceLogo {
+            0% {
+                transform: scale(1);
+            }
+
+            20% {
+                transform: scale(1.2);
+            }
+
+            40% {
+                transform: scale(0.9);
+            }
+
+            60% {
+                transform: scale(1.1);
+            }
+
+            80% {
+                transform: scale(0.95);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
 
@@ -179,19 +210,24 @@
                         <span>+91 93708 12640</span>
                     </a>
                     <span class="h-4 w-px bg-gray-600"></span>
-                    <div class="flex space-x-3">
-                        <a href="https://facebook.com" target="_blank" class="hover:text-orange-400">
-                            <i class="fab fa-facebook-f text-orange-400"></i>
-                        </a>
-                        <a href="https://twitter.com" target="_blank" class="hover:text-orange-400">
-                            <i class="fab fa-twitter text-orange-400"></i>
-                        </a>
-                        <a href="https://instagram.com" target="_blank" class="hover:text-orange-400">
-                            <i class="fab fa-instagram text-orange-400"></i>
-                        </a>
-                        <a href="https://linkedin.com" target="_blank" class="hover:text-orange-400">
-                            <i class="fab fa-linkedin-in text-orange-400"></i>
-                        </a>
+                     <!-- 🌐 Social Icons -->
+                        <div class="flex items-center space-x-3">
+                            <a href="https://www.facebook.com/p/Kunash-Enterprises-100095164553847/" target="_blank"
+                                class="hover:text-orange-400">
+                                <i class="fab fa-facebook-f text-orange-400 text-lg"></i>
+                            </a>
+                            <a href="https://arattai.com" target="_blank"
+                                class="hover:text-orange-400 flex items-center justify-center w-5 h-5">
+                                <span class="font-bold text-orange-400 text-base">A</span>
+                            </a>
+                            <a href="https://www.instagram.com/kunashenterprise/" target="_blank" class="hover:text-orange-400">
+                                <i class="fab fa-instagram text-orange-400 text-lg"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/posts/kunash-enterprises-858379264_lenovo-thinkpad-x390-intel-core-i5-8th-generation-activity-7064473781410381825-R31H/"
+                                target="_blank" class="hover:text-orange-400">
+                                <i class="fab fa-linkedin-in text-orange-400 text-lg"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -343,32 +379,33 @@
         </div>
     </section>
 
-    <!-- Footer -->
+     <!-- Footer -->
     <footer class="bg-gray-900 text-white pt-16 pb-8">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 <div class="lg:pr-4 mb-10 lg:mr-16">
                     <div class="flex items-center mb-6">
-                        <img src="images/logoo bg.png" alt="Kunash Enterprises" class="h-10">
+                        <img src="images/logoo bg.png" alt="Kunash Enterprises"
+                            class="h-10 animate-continuous-bounce-logo">
                     </div>
                     <p class="text-gray-400 mb-6 leading-relaxed">
                         Your trusted partner for laptops and accessories since 2010. We provide quality products with
                         exceptional service.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="#"
+                        <a href="https://www.facebook.com/p/Kunash-Enterprises-100095164553847/"
                             class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#"
+                        <a href="https://www.arattai.in/"
                             class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
-                            <i class="fab fa-twitter"></i>
+                            <span class="text-sm font-bold">A</span>
                         </a>
-                        <a href="#"
+                        <a href="https://www.instagram.com/kunashenterprise/"
                             class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#"
+                        <a href="https://www.linkedin.com/posts/kunash-enterprises-858379264_lenovo-thinkpad-x390-intel-core-i5-8th-generation-activity-7064473781410381825-R31H/"
                             class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
@@ -479,6 +516,7 @@
             </div>
         </div>
     </footer>
+
 
     <!-- Live Chat Button -->
     <a href="https://wa.me/9370812640" target="_blank">

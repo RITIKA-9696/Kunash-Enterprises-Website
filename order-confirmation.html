@@ -41,6 +41,36 @@
         .tracking-progress {
             background: linear-gradient(90deg, #10b981 0%, #10b981 var(--progress, 0%), #e5e7eb var(--progress, 0%), #e5e7eb 100%);
         }
+         /* Continuous Bouncy Logo Animation */
+        .animate-continuous-bounce-logo {
+            animation: bounceLogo 1.5s ease-in-out infinite;
+        }
+
+        @keyframes bounceLogo {
+            0% {
+                transform: scale(1);
+            }
+
+            20% {
+                transform: scale(1.2);
+            }
+
+            40% {
+                transform: scale(0.9);
+            }
+
+            60% {
+                transform: scale(1.1);
+            }
+
+            80% {
+                transform: scale(0.95);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
 
@@ -327,13 +357,14 @@
         </div>
     </main>
 
-    <!-- Footer -->
+     <!-- Footer -->
     <footer class="bg-gray-900 text-white pt-16 pb-8">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 <div class="lg:pr-4 mb-10 lg:mr-16">
                     <div class="flex items-center mb-6">
-                        <img src="images/logoo bg.png" alt="Kunash Enterprises" class="h-10">
+                        <img src="images/logoo bg.png" alt="Kunash Enterprises"
+                            class="h-10 animate-continuous-bounce-logo">
                     </div>
                     <p class="text-gray-400 mb-6 leading-relaxed">
                         Your trusted partner for laptops and accessories since 2010. We provide quality products with

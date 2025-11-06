@@ -508,6 +508,74 @@
         .promise-card .promise-card-inner {
             animation: none !important;
         }
+
+        /* Flip Card Styling */
+        .flip-card {
+            perspective: 1000px;
+            height: 300px;
+            /* Adjust height as needed */
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+
+        .flip-card-front {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Continuous Bouncy Logo Animation */
+        .animate-continuous-bounce-logo {
+            animation: bounceLogo 1.5s ease-in-out infinite;
+        }
+
+        @keyframes bounceLogo {
+            0% {
+                transform: scale(1);
+            }
+
+            20% {
+                transform: scale(1.2);
+            }
+
+            40% {
+                transform: scale(0.9);
+            }
+
+            60% {
+                transform: scale(1.1);
+            }
+
+            80% {
+                transform: scale(0.95);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
 
@@ -559,24 +627,27 @@
                         <span class="hidden md:block h-4 w-px bg-gray-600"></span>
 
                         <!-- 🌐 Social Icons -->
-                        <div class="flex space-x-3">
-                            <a href="https://facebook.com" target="_blank" class="hover:text-orange-400">
-                                <i class="fab fa-facebook-f text-orange-400"></i>
+                        <div class="flex items-center space-x-3">
+                            <a href="https://www.facebook.com/p/Kunash-Enterprises-100095164553847/" target="_blank"
+                                class="hover:text-orange-400">
+                                <i class="fab fa-facebook-f text-orange-400 text-lg"></i>
                             </a>
-                            <a href="https://twitter.com" target="_blank" class="hover:text-orange-400">
-                                <i class="fab fa-twitter text-orange-400"></i>
+                            <a href="https://arattai.com" target="_blank"
+                                class="hover:text-orange-400 flex items-center justify-center w-5 h-5">
+                                <span class="font-bold text-orange-400 text-base">A</span>
                             </a>
-                            <a href="https://instagram.com" target="_blank" class="hover:text-orange-400">
-                                <i class="fab fa-instagram text-orange-400"></i>
+                            <a href="https://www.instagram.com/kunashenterprise/" target="_blank" class="hover:text-orange-400">
+                                <i class="fab fa-instagram text-orange-400 text-lg"></i>
                             </a>
-                            <a href="https://linkedin.com" target="_blank" class="hover:text-orange-400">
-                                <i class="fab fa-linkedin-in text-orange-400"></i>
+                            <a href="https://www.linkedin.com/posts/kunash-enterprises-858379264_lenovo-thinkpad-x390-intel-core-i5-8th-generation-activity-7064473781410381825-R31H/"
+                                target="_blank" class="hover:text-orange-400">
+                                <i class="fab fa-linkedin-in text-orange-400 text-lg"></i>
                             </a>
                         </div>
+
                     </div>
                 </div>
             </div>
-
 
             <!-- Main Header/Navbar -->
             <div class="bg-white shadow-md">
@@ -975,10 +1046,10 @@
         <div class="container mx-auto px-4 relative z-10">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold text-center mb-4" style="background: linear-gradient(90deg, #FFB347 0%, #FF7A00 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;">
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                color: transparent;">
                     Our Promise to You
                 </h2>
                 <p class="text-black-600 text-xl max-w-3xl mx-auto">
@@ -988,76 +1059,75 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <!-- Card 1 -->
-                <div class="promise-card group">
-                    <div class="promise-card-inner">
-                        <div class="promise-card-front flex flex-col items-center text-center p-8">
-                            <div class="icon-container mb-6">
-                                <div class="icon-circle">
-                                    <i class="fas fa-sync-alt"></i>
-                                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div
+                            class="flip-card-front bg-white rounded-lg shadow-md p-8 text-center transition duration-300">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+                                style="background: linear-gradient(135deg, #FFB347, #FF7A00);">
+                                <i class="fas fa-sync-alt text-white text-2xl"></i>
                             </div>
                             <h3 class="text-xl font-semibold mb-3">Easy Upgrade Program</h3>
                             <p class="text-gray-600">Our exclusive buyback program makes upgrading to newer technology
                                 simple and affordable.</p>
+                            <div class="mt-4 text-orange-600 font-medium">Click to learn more</div>
                         </div>
-                        <div class="promise-card-back absolute inset-0 flex items-center justify-center p-6">
-                            <div class="text-center">
-                                <p class="text-white font-medium mb-4">Get the latest technology with our hassle-free
-                                    upgrade program</p>
-                                <a href="services.html"
-                                    class="inline-block bg-white text-orange-600 px-4 py-2 rounded-lg font-medium mt-2 hover:bg-gray-100 transition">Learn
-                                    More</a>
-                            </div>
+                        <div class="flip-card-back text-white rounded-lg shadow-md p-6 text-center flex flex-col items-center justify-center"
+                            style="background: radial-gradient(circle, #FFB347 0%, #FF7A00 70%, #FF5500 100%);">
+                            <p class="font-medium mb-4">Get the latest technology with our hassle-free upgrade program
+                            </p>
+                            <a href="services.html"
+                                class="bg-white text-orange-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition">Learn
+                                More</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 2 -->
-                <div class="promise-card group">
-                    <div class="promise-card-inner">
-                        <div class="promise-card-front flex flex-col items-center text-center p-8">
-                            <div class="icon-container mb-6">
-                                <div class="icon-circle">
-                                    <i class="fas fa-tools"></i>
-                                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div
+                            class="flip-card-front bg-white rounded-lg shadow-md p-8 text-center transition duration-300">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+                                style="background: linear-gradient(135deg, #FFB347, #FF7A00);">
+                                <i class="fas fa-tools text-white text-2xl"></i>
                             </div>
                             <h3 class="text-xl font-semibold mb-3">Expert Technical Support</h3>
                             <p class="text-gray-600">Our certified technicians provide comprehensive support and
                                 maintenance services.</p>
+                            <div class="mt-4 text-orange-600 font-medium">Click to learn more</div>
                         </div>
-                        <div class="promise-card-back absolute inset-0 flex items-center justify-center p-6">
-                            <div class="text-center">
-                                <p class="text-white font-medium mb-4">Our experts are available to solve all your
-                                    technical issues</p>
-                                <a href="services.html"
-                                    class="inline-block bg-white text-orange-600 px-4 py-2 rounded-lg font-medium mt-2 hover:bg-gray-100 transition">Learn
-                                    More</a>
-                            </div>
+                        <div class="flip-card-back text-white rounded-lg shadow-md p-6 text-center flex flex-col items-center justify-center"
+                            style="background: radial-gradient(circle, #FFB347 0%, #FF7A00 70%, #FF5500 100%);">
+                            <p class="font-medium mb-4">Our experts are available to solve all your technical issues</p>
+                            <a href="services.html"
+                                class="bg-white text-orange-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition">Learn
+                                More</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 3 -->
-                <div class="promise-card group">
-                    <div class="promise-card-inner">
-                        <div class="promise-card-front flex flex-col items-center text-center p-8">
-                            <div class="icon-container mb-6">
-                                <div class="icon-circle">
-                                    <i class="fas fa-shield-alt"></i>
-                                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div
+                            class="flip-card-front bg-white rounded-lg shadow-md p-8 text-center transition duration-300">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+                                style="background: linear-gradient(135deg, #FFB347, #FF7A00);">
+                                <i class="fas fa-shield-alt text-white text-2xl"></i>
                             </div>
                             <h3 class="text-xl font-semibold mb-3">Quality Guaranteed</h3>
                             <p class="text-gray-600">Every product undergoes rigorous testing to ensure reliability and
                                 performance.</p>
+                            <div class="mt-4 text-orange-600 font-medium">Click to learn more</div>
                         </div>
-                        <div class="promise-card-back absolute inset-0 flex items-center justify-center p-6">
-                            <div class="text-center">
-                                <p class="text-white font-medium mb-4">We stand behind the quality of all our products
-                                    with comprehensive warranties</p>
-                                <a href="services.html"
-                                    class="inline-block bg-white text-orange-600 px-4 py-2 rounded-lg font-medium mt-2 hover:bg-gray-100 transition">Learn
-                                    More</a>
-                            </div>
+                        <div class="flip-card-back text-white rounded-lg shadow-md p-6 text-center flex flex-col items-center justify-center"
+                            style="background: radial-gradient(circle, #FFB347 0%, #FF7A00 70%, #FF5500 100%);">
+                            <p class="font-medium mb-4">We stand behind the quality of all our products with
+                                comprehensive warranties</p>
+                            <a href="services.html"
+                                class="bg-white text-orange-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition">Learn
+                                More</a>
                         </div>
                     </div>
                 </div>
@@ -1081,7 +1151,7 @@
            color: transparent;">
                 Featured Products
             </h2>
-            <p class="text-black-600 text-center mb-12">Check out our most popular items</p>
+            <!-- <p class="text-black-600 text-center mb-12">Check out our most popular items</p> -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
                     <div class="relative overflow-hidden">
@@ -1228,26 +1298,27 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 <div class="lg:pr-4 mb-10 lg:mr-16">
                     <div class="flex items-center mb-6">
-                        <img src="images/logoo bg.png" alt="Kunash Enterprises" class="h-10">
+                        <img src="images/logoo bg.png" alt="Kunash Enterprises"
+                            class="h-10 animate-continuous-bounce-logo">
                     </div>
                     <p class="text-gray-400 mb-6 leading-relaxed">
                         Your trusted partner for laptops and accessories since 2010. We provide quality products with
                         exceptional service.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="#"
+                        <a href="https://www.facebook.com/p/Kunash-Enterprises-100095164553847/"
                             class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#"
+                        <a href="https://www.arattai.in/"
                             class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
-                            <i class="fab fa-twitter"></i>
+                            <span class="text-sm font-bold">A</span>
                         </a>
-                        <a href="#"
+                        <a href="https://www.instagram.com/kunashenterprise/"
                             class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#"
+                        <a href="https://www.linkedin.com/posts/kunash-enterprises-858379264_lenovo-thinkpad-x390-intel-core-i5-8th-generation-activity-7064473781410381825-R31H/"
                             class="bg-orange-600 hover:bg-orange-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
                             <i class="fab fa-linkedin-in"></i>
                         </a>

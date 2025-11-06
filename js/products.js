@@ -219,6 +219,23 @@ async function fetchProducts() {
             inStock: true,
             isFeatured: false,
             tags: ["business", "professional"]
+        },
+        {
+            id: 10,
+            name: "Refurbished Gaming Laptop",
+            description: "High-performance refurbished gaming laptop",
+            price: 45000,
+            originalPrice: 70000,
+            image: "images/p10.png",
+            category: "Refurbished",
+            brand: "Lenovo",
+            condition: "Refurbished",
+            ram: "16GB",
+            cpu: "Intel i7",
+            accessories: [],
+            inStock: true,
+            isFeatured: true,
+            tags: ["refurbished", "gaming"]
         }
     ];
 }
@@ -460,7 +477,7 @@ function sortProducts(sortBy) {
             filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
             break;
         case 'name-desc':
-            filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+            filteredProducts.sort((a, b) => b.name.localeCompare(b.name));
             break;
         case 'newest':
             // Assuming products have a dateAdded property

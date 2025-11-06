@@ -171,3 +171,34 @@ header {
     pointer-events: none;
     background-color: #f9fafb;
 }
+
+ /* Continuous Bouncy Logo Animation */
+        .animate-continuous-bounce-logo {
+            animation: bounceLogo 1.5s ease-in-out infinite;
+        }
+
+        @keyframes bounceLogo {
+            0% {
+                transform: scale(1);
+            }
+
+            20% {
+                transform: scale(1.2);
+            }
+
+            40% {
+                transform: scale(0.9);
+            }
+
+            60% {
+                transform: scale(1.1);
+            }
+
+            80% {
+                transform: scale(0.95);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }

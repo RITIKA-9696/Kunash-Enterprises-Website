@@ -346,6 +346,21 @@
         <div class="container mx-auto px-4">
             <h1 class="text-3xl md:text-4xl font-bold mb-8 text-center">Your Cart</h1>
             <div id="cartContainer" class="bg-white rounded-lg shadow-md p-6">
+                <!-- Login Required Message -->
+                <div id="loginRequired" class="text-center hidden">
+                    <i class="fas fa-user-lock text-6xl text-gray-300 mb-4"></i>
+                    <p class="text-gray-600 text-lg mb-2">Please log in to view your cart</p>
+                    <p class="text-gray-500 mb-4">Sign in to see your cart items and continue shopping</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="login.html" class="bg-orange-600 text-white py-2 px-6 rounded-lg hover:bg-orange-700 transition transform hover:-translate-y-1">
+                            Login
+                        </a>
+                        <a href="signup.html" class="bg-gray-600 text-white py-2 px-6 rounded-lg hover:bg-gray-700 transition transform hover:-translate-y-1">
+                            Sign Up
+                        </a>
+                    </div>
+                </div>
+
                 <div id="emptyCart" class="text-center hidden">
                     <i class="fas fa-shopping-cart text-6xl text-gray-300 mb-4"></i>
                     <p class="text-gray-600 text-lg mb-4">Your cart is empty.</p>
@@ -569,6 +584,9 @@
                     e.preventDefault();
                     localStorage.removeItem('isLoggedIn');
                     localStorage.removeItem('currentUser');
+                    // Clear user-specific data
+                    localStorage.removeItem('cart');
+                    localStorage.removeItem('wishlist');
                     alert('Logged out successfully!');
                     window.location.reload();
                 });
@@ -615,6 +633,7 @@
             // Cart Functionality
             const cartItemsContainer = document.getElementById('cartItems');
             const emptyCart = document.getElementById('emptyCart');
+            const loginRequired = document.getElementById('loginRequired');
             const cartTotals = document.getElementById('cartTotals');
             const cartSubtotal = document.getElementById('cartSubtotal');
             const cartTotal = document.getElementById('cartTotal');
@@ -622,6 +641,18 @@
             const wishlistCount = document.getElementById('wishlistCount');
 
             function renderCart() {
+                // Check if user is logged in
+                if (!isLoggedIn) {
+                    loginRequired.classList.remove('hidden');
+                    emptyCart.classList.add('hidden');
+                    cartTotals.classList.add('hidden');
+                    cartItemsContainer.innerHTML = '';
+                    cartCount.classList.add('hidden');
+                    return;
+                }
+
+                loginRequired.classList.add('hidden');
+                
                 const cart = JSON.parse(localStorage.getItem('cart')) || [];
                 cartItemsContainer.innerHTML = '';
                 
@@ -684,6 +715,11 @@
 
             // Remove item from cart
             function removeFromCart(index) {
+                if (!isLoggedIn) {
+                    showNotification('Please log in to manage your cart', 'error');
+                    return;
+                }
+
                 const cart = JSON.parse(localStorage.getItem('cart')) || [];
                 const removedItem = cart[index];
                 cart.splice(index, 1);
@@ -694,6 +730,11 @@
 
             // Update quantity
             function updateQuantity(index, change) {
+                if (!isLoggedIn) {
+                    showNotification('Please log in to manage your cart', 'error');
+                    return;
+                }
+
                 const cart = JSON.parse(localStorage.getItem('cart')) || [];
                 cart[index].quantity = (cart[index].quantity || 1) + change;
                 
@@ -711,10 +752,10 @@
             function showNotification(message, type) {
                 // Create notification element
                 const notification = document.createElement('div');
-                notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 transition-transform transform translate-x-full ${type === 'success' ? 'bg-green-500' : 'bg-blue-500'} text-white`;
+                notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 transition-transform transform translate-x-full ${type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500'} text-white`;
                 notification.innerHTML = `
                     <div class="flex items-center">
-                        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'} mr-2"></i>
+                        <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'} mr-2"></i>
                         <span>${message}</span>
                     </div>
                 `;
@@ -741,7 +782,13 @@
 
             // Update wishlist count in header
             function updateWishlistCount() {
+                if (!isLoggedIn) {
+                    document.getElementById('wishlistCount').classList.add('hidden');
+                    return;
+                }
+
                 const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+                const wishlistCount = document.getElementById('wishlistCount');
                 if (wishlist.length > 0) {
                     wishlistCount.textContent = wishlist.length;
                     wishlistCount.classList.remove('hidden');
@@ -768,19 +815,19 @@
                 }
             });
 
-            // Checkout button - FIXED VERSION
+            // Checkout button
             document.getElementById('checkoutButton').addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                const cart = JSON.parse(localStorage.getItem('cart')) || [];
-                if (cart.length === 0) {
-                    alert('Your cart is empty!');
+                if (!isLoggedIn) {
+                    showNotification('Please log in to proceed to checkout', 'error');
+                    window.location.href = 'login.html';
                     return;
                 }
 
-                if (!isLoggedIn) {
-                    alert('Please log in to proceed to checkout.');
-                    window.location.href = 'login.html';
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                if (cart.length === 0) {
+                    showNotification('Your cart is empty!', 'error');
                     return;
                 }
                 

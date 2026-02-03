@@ -75,12 +75,12 @@ async function fetchProducts() {
             id: 1,
             name: "Gaming Laptop Pro",
             description: "High performance gaming laptop with RTX graphics",
-            price: 80000,
-            originalPrice: 90000,
+            minPrice: 80000,    // Minimum price
+        maxPrice: 120000,   // Maximum price
             image: "images/P1.png",
             category: "New Laptops",
             brand: "Dell",
-            condition: "New",
+            condition: "Best Seller",
             ram: "16GB",
             cpu: "Intel i7",
             accessories: [],
@@ -92,12 +92,12 @@ async function fetchProducts() {
             id: 2,
             name: "Business Ultrabook",
             description: "Sleek and powerful for professionals",
-            price: 96000,
-            originalPrice: 110000,
+           minPrice: 80000,    // Minimum price
+        maxPrice: 120000,   // Maximum price
             image: "images/p2.png",
             category: "New Laptops",
             brand: "HP",
-            condition: "New",
+            condition: "Best Seller",
             ram: "8GB",
             cpu: "Intel i5",
             accessories: [],
@@ -109,11 +109,12 @@ async function fetchProducts() {
             id: 3,
             name: "Wireless Keyboard & Mouse",
             description: "Ergonomic design with long battery life",
-            price: 999,
+           minPrice: 80000,    // Minimum price
+        maxPrice: 120000,   // Maximum price
             image: "images/p3.jpg",
             category: "Accessories",
             brand: "Dell",
-            condition: "New",
+            condition: "Best Seller",
             ram: null,
             cpu: null,
             accessories: ["keyboard", "mouse"],
@@ -125,12 +126,12 @@ async function fetchProducts() {
             id: 4,
             name: "Desktop Workstation",
             description: "Powerful desktop for professionals",
-            price: 50000,
-            originalPrice: 60000,
+           minPrice: 80000,    // Minimum price
+        maxPrice: 120000,   // Maximum price
             image: "images/p4.jpg",
             category: "Desktops",
             brand: "Apple",
-            condition: "Refurbished",
+            condition: "New",
             ram: "32GB",
             cpu: "Intel i9",
             accessories: [],
@@ -142,7 +143,8 @@ async function fetchProducts() {
             id: 5,
             name: "Gaming Monitor",
             description: "27-inch 144Hz gaming monitor",
-            price: 95000,
+            minPrice: 80000,    // Minimum price
+        maxPrice: 120000,   // Maximum price
             image: "images/p11.png",
             category: "Accessories",
             brand: "HP",
@@ -158,11 +160,12 @@ async function fetchProducts() {
             id: 6,
             name: "Laptop Bag",
             description: "Durable and stylish laptop bag",
-            price: 4999,
+                minPrice: 80000,    // Minimum price
+        maxPrice: 120000,   // Maximum price
             image: "images/p6.jpg",
             category: "Accessories",
             brand: "Lenovo",
-            condition: "New",
+            condition: "Best Seller",
             ram: null,
             cpu: null,
             accessories: ["bag"],
@@ -174,12 +177,13 @@ async function fetchProducts() {
             id: 7,
             name: "Refurbished Laptop Elite",
             description: "Like-new condition with warranty",
-            price: 35000,
+            minPrice: 80000,    // Minimum price
+        maxPrice: 120000,   // Maximum price
             originalPrice: 60000,
             image: "images/p7.png",
             category: "Old Laptops",
             brand: "Dell",
-            condition: "Refurbished",
+            condition: "Best Seller",
             ram: "8GB",
             cpu: "Intel i5",
             accessories: [],
@@ -191,11 +195,12 @@ async function fetchProducts() {
             id: 8,
             name: "Gaming Mouse",
             description: "High precision gaming mouse with RGB",
-            price: 2500,
+            minPrice: 80000,    // Minimum price
+        maxPrice: 120000,   // Maximum price
             image: "images/p8.png",
             category: "Accessories",
             brand: "Razer",
-            condition: "New",
+            condition: "Best Seller",
             ram: null,
             cpu: null,
             accessories: ["mouse"],
@@ -207,12 +212,13 @@ async function fetchProducts() {
             id: 9,
             name: "Professional Laptop",
             description: "Business laptop with security features",
-            price: 75000,
+            minPrice: 80000,    // Minimum price
+        maxPrice: 120000,   // Maximum price
             originalPrice: 85000,
             image: "images/p9.jpg",
             category: "New Laptops",
             brand: "Lenovo",
-            condition: "New",
+            condition: "Best Seller",
             ram: "16GB",
             cpu: "Intel i7",
             accessories: [],
@@ -224,12 +230,13 @@ async function fetchProducts() {
             id: 10,
             name: "Refurbished Gaming Laptop",
             description: "High-performance refurbished gaming laptop",
-            price: 45000,
+            minPrice: 80000,    // Minimum price
+        maxPrice: 120000,   // Maximum price
             originalPrice: 70000,
             image: "images/p10.png",
             category: "Refurbished",
             brand: "Lenovo",
-            condition: "Refurbished",
+            condition: "Best Seller",
             ram: "16GB",
             cpu: "Intel i7",
             accessories: [],
@@ -525,14 +532,8 @@ function displayProducts() {
         <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300 flex flex-col h-full relative" 
              data-category="${product.category}" 
              data-brand="${product.brand}" 
-             data-price="${product.price}">
-            
-            <!-- Wishlist Icon -->
-            <button class="absolute top-2 right-2 z-10 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center transition-all duration-300 hover:bg-orange-50 hover:scale-110 wishlist-btn" 
-                    data-product-id="${product.id}"
-                    title="Add to Wishlist">
-                <i class="fas fa-heart text-gray-400 hover:text-red-500"></i>
-            </button>
+             data-min-price="${product.minPrice || product.price}" 
+             data-max-price="${product.maxPrice || product.price}">
             
             <div class="relative overflow-hidden flex-shrink-0">
                 <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover transition duration-500 hover:scale-105">
@@ -544,13 +545,23 @@ function displayProducts() {
                 <div class="mt-auto">
                     <div class="flex justify-between items-center mb-3">
                         <div>
-                            <span class="text-2xl font-bold text-orange-600">₹${product.price.toLocaleString()}</span>
-                            ${product.originalPrice ? `<span class="text-sm text-gray-500 line-through ml-2">₹${product.originalPrice.toLocaleString()}</span>` : ''}
+                            ${getPriceRangeDisplay(product)}
                         </div>
                     </div>
-                    <a href="product-detail.html?id=${product.id}" class="w-full bg-orange-600 text-white px-4 py-3 rounded-lg hover:bg-orange-700 transition text-center block font-semibold">
-                        View Details
-                    </a>
+                    <div class="flex gap-2">
+                       
+                        <button class="flex-1 bg-green-600 text-white px-4 py-3 rounded-lg hover:bg-green-700 transition text-center font-semibold whatsapp-order-btn"
+                                data-product='${JSON.stringify({
+                                    id: product.id,
+                                    name: product.name,
+                                    minPrice: product.minPrice || product.price,
+                                    maxPrice: product.maxPrice || product.price,
+                                    category: product.category,
+                                    brand: product.brand
+                                }).replace(/'/g, "\\'")}'>
+                            <i class="fab fa-whatsapp mr-2"></i>Order
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -559,8 +570,116 @@ function displayProducts() {
     // Add event listeners to wishlist buttons
     setupWishlistEventListeners();
     
+    // Add event listeners to WhatsApp buttons
+    setupWhatsAppOrderButtons();
+    
     // Generate pagination
-    generatePagination(totalPages);
+    // generatePagination(totalPages);
+}
+
+// Helper function to display price range
+function getPriceRangeDisplay(product) {
+    const minPrice = product.minPrice || product.price;
+    const maxPrice = product.maxPrice || product.price;
+    
+    // Format numbers with commas for Indian numbering
+    const formatPrice = (price) => {
+        return price.toLocaleString('en-IN');
+    };
+    
+    if (minPrice === maxPrice) {
+        // Single price
+        return `
+            <span class="text-2xl font-bold text-orange-600">₹${formatPrice(minPrice)}</span>
+            ${product.originalPrice ? `<span class="text-sm text-gray-500 line-through ml-2">₹${formatPrice(product.originalPrice)}</span>` : ''}
+        `;
+    } else {
+        // Price range
+        return `
+            <div class="price-range">
+                <div class="text-lg font-bold text-orange-600">
+                    ₹${formatPrice(minPrice)} - ₹${formatPrice(maxPrice)}
+                </div>
+                ${product.originalPrice ? `
+                    <div class="text-sm text-gray-500 line-through">
+                        Original: ₹${formatPrice(product.originalPrice)}
+                    </div>
+                ` : ''}
+                ${product.priceRangeNote ? `
+                    <div class="text-xs text-gray-600 mt-1">
+                        ${product.priceRangeNote}
+                    </div>
+                ` : ''}
+            </div>
+        `;
+    }
+}
+
+// Setup WhatsApp order buttons
+function setupWhatsAppOrderButtons() {
+    const whatsappButtons = document.querySelectorAll('.whatsapp-order-btn');
+    
+    whatsappButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            try {
+                const productData = JSON.parse(this.getAttribute('data-product'));
+                sendWhatsAppOrder(productData);
+            } catch (error) {
+                console.error('Error parsing product data:', error);
+                // Fallback
+                const productCard = this.closest('.product-card');
+                const productName = productCard.querySelector('h3').textContent;
+                const priceRange = productCard.querySelector('.price-range .text-orange-600').textContent;
+                sendSimpleWhatsAppMessage(productName, priceRange);
+            }
+        });
+    });
+}
+
+// Send WhatsApp order message with price range
+function sendWhatsAppOrder(product) {
+    const phoneNumber = '9370812640';
+    
+    // Format price for display
+    const formatPrice = (price) => {
+        return price.toLocaleString('en-IN');
+    };
+    
+    // Simple, clean message format
+    let message = `Hello! I would like to inquire about:\n\n`;
+    message += `Product: ${product.name}\n`;
+    
+    if (product.minPrice && product.maxPrice && product.minPrice !== product.maxPrice) {
+        message += `Price Range: ₹${formatPrice(product.minPrice)} - ₹${formatPrice(product.maxPrice)}\n`;
+    } else {
+        message += `Price: ₹${formatPrice(product.minPrice)}\n`;
+    }
+    
+    message += `Category: ${product.category}\n`;
+    message += `Brand: ${product.brand}\n\n`;
+    message += `Please let me know the exact price and availability.\n\n`;
+    // message += `My details:\n`;
+    // message += `Name: ________\n`;
+    // message += `Phone: ________\n`;
+    // message += `Address: ________\n`;
+    // message += `Preferred delivery time: ________`;
+    
+    // Encode for URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Create WhatsApp URL
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+}
+
+// Alternative simple function
+function sendSimpleWhatsAppMessage(productName, priceRange) {
+    const phoneNumber = '9370812640';
+    const message = `I want to inquire about: ${productName}\nPrice: ${priceRange}\n\nPlease contact me with exact price.\n\nName: __\nPhone: __\nAddress: __`;
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
 }
 
 // Setup wishlist event listeners
@@ -591,10 +710,10 @@ function setupWishlistEventListeners() {
 function getProductBadges(product) {
     let badges = '';
     
-    if (product.condition === 'New' && product.isFeatured) {
-        badges += '<span class="product-badge badge-new">New</span>';
-    } else if (product.condition === 'Refurbished') {
-        badges += '<span class="product-badge badge-refurbished">Refurbished</span>';
+    if (product.condition === 'Best Seller' && product.isFeatured) {
+        badges += '<span class="product-badge badge-new">Best Sellers</span>';
+    } else if (product.condition === 'New') {
+        badges += '<span class="product-badge badge-refurbished">New</span>';
     }
     
     if (product.originalPrice && product.price < product.originalPrice) {

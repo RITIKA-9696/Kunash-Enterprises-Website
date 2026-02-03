@@ -219,7 +219,6 @@
             }
         }
 
-        /* Only apply floating to special offers section */
         .special-offers-section .floating {
             position: absolute;
             animation: floating 7s ease-in-out infinite;
@@ -307,7 +306,6 @@
             top: 100%;
         }
 
-        /* New banner animation styles */
         @keyframes slideInFromLeft {
             0% {
                 opacity: 0;
@@ -429,12 +427,10 @@
             box-shadow: 0 15px 25px rgba(255, 122, 0, 0.4);
         }
 
-        /* Video background styling */
         video {
             filter: brightness(0.7);
         }
 
-        /* Icon hover effects */
         .icon-hover {
             transition: all 0.3s ease;
         }
@@ -448,7 +444,6 @@
             color: white !important;
         }
 
-        /* Add this to your existing CSS */
         @media (max-width: 768px) {
             .flip-card.auto-flip .flip-card-inner {
                 animation: autoFlip 6s infinite;
@@ -484,13 +479,11 @@
             }
         }
 
-        /* Remove floating from all other sections */
         section:not(.special-offers-section) .floating {
             animation: none !important;
             position: static !important;
         }
 
-        /* Remove transform from cards */
         .product-card,
         .category-card,
         .promise-card,
@@ -504,16 +497,13 @@
             transform: none !important;
         }
 
-        /* Remove floating animations from promise cards */
         .promise-card .promise-card-inner {
             animation: none !important;
         }
 
-        /* Flip Card Styling */
         .flip-card {
             perspective: 1000px;
             height: 300px;
-            /* Adjust height as needed */
         }
 
         .flip-card-inner {
@@ -546,7 +536,6 @@
             transform: rotateY(180deg);
         }
 
-        /* Continuous Bouncy Logo Animation */
         .animate-continuous-bounce-logo {
             animation: bounceLogo 1.5s ease-in-out infinite;
         }
@@ -575,6 +564,23 @@
             100% {
                 transform: scale(1);
             }
+        }
+        
+        /* WhatsApp Order Button Style */
+        .whatsapp-order-btn {
+            background-color: #25D366;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-order-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-icon {
+            margin-right: 6px;
         }
     </style>
 </head>
@@ -666,20 +672,6 @@
                 </nav>
         
                 <div class="flex items-center space-x-4">
-                    <!-- Wishlist Icon (Always Visible) -->
-                    <a href="wishlist.html" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-heart text-gray-700 text-xl"></i>
-                        <!-- Optional badge example -->
-                        <!-- <span class="absolute -top-1 -right-1 bg-orange-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span> -->
-                    </a>
-        
-                    <!-- Cart Icon (Always Visible) -->
-                    <a href="/cart.html" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-shopping-cart text-gray-700 text-xl"></i>
-                        <!-- Optional badge example -->
-                        <!-- <span class="absolute -top-1 -right-1 bg-orange-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">5</span> -->
-                    </a>
-        
                     <!-- User Profile Dropdown -->
                     <div class="relative" id="userProfileDropdown">
                         <button id="userMenuButton" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
@@ -688,15 +680,15 @@
         
                         <!-- Dropdown Menu (Not Logged In) -->
                         <div id="guestMenu"
-                            class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden border border-gray-200">
-                            <a href="login.html"
+                            class="">
+                            <!-- <a href="login.html"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-orange-600">
                                 <i class="fas fa-sign-in-alt mr-2"></i>Login
-                            </a>
-                            <a href="signup.html"
+                            </a> -->
+                            <!-- <a href="signup.html"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-orange-600">
                                 <i class="fas fa-user-plus mr-2"></i>Sign Up
-                            </a>
+                            </a> -->
                         </div>
         
                         <!-- Dropdown Menu (Logged In) -->
@@ -732,24 +724,13 @@
                 <a href="about.html" class="block py-2 text-gray-700 hover:text-orange-600">About</a>
                 <a href="contact.html" class="block py-2 text-gray-700 hover:text-orange-600">Contact</a>
         
-                <div class="flex justify-around border-t pt-4 mt-4">
-                    <a href="wishlist.html" class="flex flex-col items-center text-gray-700 hover:text-orange-600">
-                        <i class="fas fa-heart text-2xl"></i>
-                        <span class="text-xs mt-1">Wishlist</span>
-                    </a>
-                    <a href="cart.html" class="flex flex-col items-center text-gray-700 hover:text-orange-600">
-                        <i class="fas fa-shopping-cart text-2xl"></i>
-                        <span class="text-xs mt-1">Cart</span>
-                    </a>
-                </div>
-        
                 <div class="border-t mt-4 pt-4">
-                    <a href="login.html" class="block py-2 text-gray-700 hover:text-orange-600">
+                    <!-- <a href="login.html" class="block py-2 text-gray-700 hover:text-orange-600">
                         <i class="fas fa-sign-in-alt mr-2"></i>Login
-                    </a>
-                    <a href="signup.html" class="block py-2 text-gray-700 hover:text-orange-600">
+                    </a> -->
+                    <!-- <a href="signup.html" class="block py-2 text-gray-700 hover:text-orange-600">
                         <i class="fas fa-user-plus mr-2"></i>Sign Up
-                    </a>
+                    </a> -->
                 </div>
             </div>
         </div>
@@ -763,13 +744,13 @@
         <!-- 🎯 Curved Rectangular Banner (Compact Version with Orange Border) -->
         <div class="relative z-10 bg-white rounded-3xl shadow-2xl mx-4 md:mx-auto 
             w-full max-w-6xl overflow-visible flex flex-col md:flex-row items-center 
-            p-4 md:p-6 border-2 border-orange-500"> <!-- ⬅️ Orange border -->
+            p-4 md:p-6 border-2 border-orange-500">
 
             <!-- 🖼️ GIF Section (Shifted Slightly Right) -->
             <div class="w-full md:w-1/2 mb-4 md:mb-0 relative z-10 opacity-0 flex justify-center" id="banner-image">
                 <div class="relative w-80 h-80 md:w-96 md:h-96 flex items-center justify-center 
       bg-gradient-to-br from-orange-200 to-orange-500 rounded-full p-2
-      translate-x-4 md:translate-x-2"> <!-- ✅ Changed here -->
+      translate-x-4 md:translate-x-2">
 
                     <!-- GIF inside the circle (max size) -->
                     <img src="images/BHI3.gif" alt="Kunash Enterprises"
@@ -831,9 +812,6 @@
                 </div>
             </div>
         </div>
-
-
-
 
         <!-- ⬇️ Scroll Indicator -->
         <div id="scroll-indicator" role="button" tabindex="0" aria-label="Scroll to next section"
@@ -1006,7 +984,7 @@
     </section>
 
     <!-- Special Offers -->
-    <section class="special-offers-section relative py-24 flex justify-center overflow-hidden">
+    <!-- <section class="special-offers-section relative py-24 flex justify-center overflow-hidden">
         <div class="absolute inset-0 pointer-events-none">
             <i class="fas fa-laptop text-5xl text-orange-500 floating" style="top:10%; left:5%;"></i>
             <i class="fas fa-keyboard text-4xl text-orange-600 floating delay-400" style="top:70%; left:8%;"></i>
@@ -1053,7 +1031,7 @@
                 Shop Now
             </a>
         </div>
-    </section>
+    </section> -->
 
     <!-- Our Promise Section -->
     <section class="py-10 relative overflow-hidden"
@@ -1156,6 +1134,7 @@
             </div>
         </div>
     </section>
+    
     <!-- Featured Products -->
     <section class="py-16">
         <div class="container mx-auto px-4">
@@ -1166,8 +1145,8 @@
            color: transparent;">
                 Featured Products
             </h2>
-            <!-- <p class="text-black-600 text-center mb-12">Check out our most popular items</p> -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1 -->
                 <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
                     <div class="relative overflow-hidden">
                         <img src="images/product1.jpg" alt="Gaming Laptop"
@@ -1177,15 +1156,18 @@
                     </div>
                     <div class="p-4">
                         <h3 class="text-xl font-semibold mb-2">Gaming Laptop Pro</h3>
-                        <p class="text-gray-600 mb-4">High-performance RTX gaming laptop</p>
+                        <p class="text-gray-600 mb-4">High-performance RTX gaming laptop with latest processor</p>
                         <div class="flex justify-between items-center">
                             <span class="text-2xl font-bold text-orange-600">₹80,000</span>
-                            <a href="product-detail.html"
-                                class="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition">View
-                                Details</a>
+                            <button onclick="orderViaWhatsApp('Gaming Laptop Pro', '₹80,000', 'High-performance RTX gaming laptop with latest processor')"
+                                class="whatsapp-order-btn px-4 py-2 rounded-lg font-medium flex items-center">
+                                <i class="fab fa-whatsapp whatsapp-icon"></i> Order Now
+                            </button>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Product 2 -->
                 <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
                     <div class="relative overflow-hidden">
                         <img src="images/product2.jpg" alt="Business Laptop"
@@ -1193,15 +1175,18 @@
                     </div>
                     <div class="p-4">
                         <h3 class="text-xl font-semibold mb-2">Business Ultrabook</h3>
-                        <p class="text-gray-600 mb-4">Sleek and powerful for professionals</p>
+                        <p class="text-gray-600 mb-4">Sleek and powerful for professionals with long battery life</p>
                         <div class="flex justify-between items-center">
                             <span class="text-2xl font-bold text-orange-600">₹96,000</span>
-                            <a href="product-detail.html"
-                                class="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition">View
-                                Details</a>
+                            <button onclick="orderViaWhatsApp('Business Ultrabook', '₹96,000', 'Sleek and powerful for professionals with long battery life')"
+                                class="whatsapp-order-btn px-4 py-2 rounded-lg font-medium flex items-center">
+                                <i class="fab fa-whatsapp whatsapp-icon"></i> Order Now
+                            </button>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Product 3 -->
                 <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
                     <div class="relative overflow-hidden">
                         <img src="images/p3.jpg" alt="Wireless Keyboard"
@@ -1211,20 +1196,22 @@
                     </div>
                     <div class="p-4">
                         <h3 class="text-xl font-semibold mb-2">Wireless Keyboard & Mouse</h3>
-                        <p class="text-gray-600 mb-4">Ergonomic design with long battery life</p>
+                        <p class="text-gray-600 mb-4">Ergonomic design with long battery life and wireless connectivity</p>
                         <div class="flex justify-between items-center">
                             <span class="text-2xl font-bold text-orange-600">₹999</span>
-                            <a href="product-detail.html"
-                                class="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition">View
-                                Details</a>
+                            <button onclick="orderViaWhatsApp('Wireless Keyboard & Mouse', '₹999', 'Ergonomic design with long battery life and wireless connectivity')"
+                                class="whatsapp-order-btn px-4 py-2 rounded-lg font-medium flex items-center">
+                                <i class="fab fa-whatsapp whatsapp-icon"></i> Order Now
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="text-center mt-12">
                 <a href="products.html"
-                    class="inline-block bg-orange-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-orange-700 transition">View
-                    All Products</a>
+                    class="inline-block bg-orange-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-orange-700 transition">
+                    View All Products
+                </a>
             </div>
         </div>
     </section>
@@ -1453,6 +1440,21 @@
     </a>
 
     <script>
+        // WhatsApp Order Function
+        function orderViaWhatsApp(productName, price, description) {
+            // Phone number: 9370812640
+            const phoneNumber = "9370812640";
+            
+            // Create the message
+            const message = `Hello Kunash Enterprises!%0A%0AI'm interested in ordering this product:%0A%0A📦 *Product:* ${productName}%0A💰 *Price:* ${price}%0A📝 *Description:* ${description}%0A%0APlease provide more details and availability.`;
+            
+            // Create the WhatsApp URL
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+            
+            // Open WhatsApp in a new tab
+            window.open(whatsappURL, '_blank');
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             // Header User Menu
             const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';

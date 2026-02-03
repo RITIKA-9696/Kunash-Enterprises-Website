@@ -107,7 +107,7 @@ async function fetchProducts() {
         },
         {
             id: 3,
-            name: "Wireless Keyboard & Mouse",
+            name: "Wireless / Wired Keyboard & Mouse",
             description: "Ergonomic design with long battery life",
            minPrice: 80000,    // Minimum price
         maxPrice: 120000,   // Maximum price
@@ -120,7 +120,7 @@ async function fetchProducts() {
             accessories: ["keyboard", "mouse"],
             inStock: true,
             isFeatured: true,
-            tags: ["wireless", "keyboard", "mouse"]
+            tags: ["wireless", "keyboard", "mouse", "wired"]
         },
         {
             id: 4,

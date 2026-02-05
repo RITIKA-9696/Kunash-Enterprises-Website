@@ -583,6 +583,175 @@
             margin-right: 6px;
         }
     </style>
+
+   <style>
+    /* Carousel Styles - FIXED TO SHOW FULL IMAGES */
+    .product-carousel {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        height: 224px; /* Fixed height */
+        background-color: #f9fafb; /* Light background for better visibility */
+    }
+    
+    .carousel-images {
+        width: 300%; /* 3 images = 300% */
+        height: 100%;
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+    
+    .carousel-images img {
+        width: 33.333333%; /* Each image takes 1/3 of the container */
+        min-width: 33.333333%;
+        height: 100%;
+        object-fit: contain; /* Changed from cover to contain to show full image */
+        flex-shrink: 0;
+        background-color: white; /* White background for images */
+        padding: 8px; /* Add some padding around images */
+    }
+    
+    /* Hover effect for carousel container */
+    .product-card:hover .carousel-prev,
+    .product-card:hover .carousel-next {
+        opacity: 100 !important;
+    }
+    
+    .carousel-prev, .carousel-next {
+        background-color: rgba(0, 0, 0, 0.7) !important;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 20;
+    }
+    
+    .carousel-prev:hover,
+    .carousel-next:hover {
+        background-color: rgba(0, 0, 0, 0.9) !important;
+        transform: translateY(-50%) scale(1.1);
+    }
+    
+    .carousel-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: white;
+        opacity: 0.5;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .carousel-dot.active {
+        background-color: white !important;
+        opacity: 1 !important;
+        transform: scale(1.2);
+        width: 10px;
+        height: 10px;
+    }
+    
+    /* Arrow buttons styling */
+    .carousel-prev i, .carousel-next i {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+    }
+    
+    /* Ensure the sale/new badge doesn't interfere */
+    .absolute.top-4.left-4 {
+        z-index: 30;
+    }
+
+    /* Additional styles for configuration section */
+    .configuration-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-top: 12px;
+    }
+    
+    .config-item {
+        display: flex;
+        align-items: center;
+        font-size: 0.75rem;
+        color: #4b5563;
+    }
+    
+    .config-item i {
+        color: #f97316;
+        margin-right: 6px;
+        font-size: 0.875rem;
+    }
+    
+    /* Make product cards taller to accommodate configuration */
+    .product-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    
+    .product-card .p-4 {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .product-card .p-4 > div:last-child {
+        margin-top: auto;
+    }
+
+     /* Additional styles for price display */
+    .price-container {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .price-label {
+        font-size: 0.75rem;
+        color: #6b7280;
+        margin-bottom: 4px;
+    }
+    
+    .current-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #f97316;
+        display: flex;
+        align-items: center;
+    }
+    
+   
+    
+    /* WhatsApp button adjustments */
+    .whatsapp-order-btn {
+        background-color: #25D366;
+        color: white;
+        transition: all 0.3s ease;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+    }
+    
+    .whatsapp-order-btn:hover {
+        background-color: #128C7E;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    }
+    
+    .whatsapp-icon {
+        margin-right: 6px;
+        font-size: 1rem;
+    }
+</style>
 </head>
 
 <body class="bg-orange-50">
@@ -1135,86 +1304,273 @@
         </div>
     </section>
     
-    <!-- Featured Products -->
-    <section class="py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12" style="background: linear-gradient(90deg, #FFB347 0%, #FF7A00 100%);
+<!-- Featured Products -->
+<section class="py-16">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12" style="background: linear-gradient(90deg, #FFB347 0%, #FF7A00 100%);
            -webkit-background-clip: text;
            -webkit-text-fill-color: transparent;
            background-clip: text;
            color: transparent;">
-                Featured Products
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Product 1 -->
-                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
-                    <div class="relative overflow-hidden">
-                        <img src="images/product1.jpg" alt="Gaming Laptop"
-                            class="w-full h-56 object-cover transition duration-500 hover:scale-105">
-                        <span
-                            class="absolute top-4 left-4 bg-orange-500 text-white text-sm px-2 py-1 rounded">Sale</span>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Gaming Laptop Pro</h3>
-                        <p class="text-gray-600 mb-4">High-performance RTX gaming laptop with latest processor</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-2xl font-bold text-orange-600">₹80,000</span>
-                            <button onclick="orderViaWhatsApp('Gaming Laptop Pro', '₹80,000', 'High-performance RTX gaming laptop with latest processor')"
-                                class="whatsapp-order-btn px-4 py-2 rounded-lg font-medium flex items-center">
-                                <i class="fab fa-whatsapp whatsapp-icon"></i> Order Now
-                            </button>
+            Featured Products
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Product 1 -->
+            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300 hover:shadow-xl group">
+                <div class="relative overflow-hidden h-56">
+                    <!-- Carousel Container -->
+                    <div class="product-carousel relative w-full h-full" data-carousel="1">
+                        <!-- Images for Product 1 -->
+                        <div class="carousel-images flex transition-transform duration-500 ease-in-out">
+                            <img src="images/featured/hp1.jpeg" alt="Gaming Laptop Front View"
+                                class="w-full h-full object-cover flex-shrink-0">
+                            <img src="images/featured/hp2.jpeg" alt="Gaming Laptop Side View"
+                                class="w-full h-full object-cover flex-shrink-0">
+                            <img src="images/featured/hp3.jpeg" alt="Gaming Laptop Gaming Mode"
+                                class="w-full h-full object-cover flex-shrink-0">
+                        </div>
+                        
+                        <!-- Navigation Arrows -->
+                        <button class="carousel-prev absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 transition-opacity group-hover:opacity-100 z-20">
+                            <i class="fas fa-chevron-left w-3 h-3"></i>
+                        </button>
+                        <button class="carousel-next absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 transition-opacity group-hover:opacity-100 z-20">
+                            <i class="fas fa-chevron-right w-3 h-3"></i>
+                        </button>
+                        
+                        <!-- Indicators/Dots -->
+                        <div class="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-1 z-20">
+                            <span class="carousel-dot w-2 h-2 rounded-full bg-white bg-opacity-50 cursor-pointer" data-index="0"></span>
+                            <span class="carousel-dot w-2 h-2 rounded-full bg-white bg-opacity-50 cursor-pointer" data-index="1"></span>
+                            <span class="carousel-dot w-2 h-2 rounded-full bg-white bg-opacity-50 cursor-pointer" data-index="2"></span>
                         </div>
                     </div>
+                    <span class="absolute top-4 left-4 bg-orange-500 text-white text-sm px-2 py-1 rounded z-10">Sale</span>
                 </div>
-                
-                <!-- Product 2 -->
-                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
-                    <div class="relative overflow-hidden">
-                        <img src="images/product2.jpg" alt="Business Laptop"
-                            class="w-full h-56 object-cover transition duration-500 hover:scale-105">
-                    </div>
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Business Ultrabook</h3>
-                        <p class="text-gray-600 mb-4">Sleek and powerful for professionals with long battery life</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-2xl font-bold text-orange-600">₹96,000</span>
-                            <button onclick="orderViaWhatsApp('Business Ultrabook', '₹96,000', 'Sleek and powerful for professionals with long battery life')"
-                                class="whatsapp-order-btn px-4 py-2 rounded-lg font-medium flex items-center">
-                                <i class="fab fa-whatsapp whatsapp-icon"></i> Order Now
-                            </button>
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold mb-2">Hp 840 G7</h3>
+                    <p class="text-gray-600 mb-4">High-performance laptop with latest processor</p>
+                    
+                    <!-- Configuration Details -->
+                    <div class="mb-4 border-t border-gray-100 pt-3">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-2">Configuration:</h4>
+                         <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div class="flex items-center">
+                                <i class="fas fa-microchip text-orange-500 mr-2"></i>
+                                <span>Intel i5/i7 processor</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-memory text-orange-500 mr-2"></i>
+                                <span>8/16GB RAM ddr4</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-hdd text-orange-500 mr-2"></i>
+                                <span>256 / 512GB SSD</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-desktop text-orange-500 mr-2"></i>
+                                <span>8th Gen</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-expand-alt text-orange-500 mr-2"></i>
+                                <span>14" 6 screen</span>
+                            </div>
+                            <!-- <div class="flex items-center">
+                                <i class="fas fa-battery-full text-orange-500 mr-2"></i>
+                                <span>12 Hours</span>
+                            </div> -->
                         </div>
                     </div>
-                </div>
-                
-                <!-- Product 3 -->
-                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
-                    <div class="relative overflow-hidden">
-                        <img src="images/p3.jpg" alt="Wireless Keyboard"
-                            class="w-full h-56 object-cover transition duration-500 hover:scale-105">
-                        <span
-                            class="absolute top-4 left-4 bg-orange-500 text-white text-sm px-2 py-1 rounded">New</span>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold mb-2">Wireless Keyboard & Mouse</h3>
-                        <p class="text-gray-600 mb-4">Ergonomic design with long battery life and wireless connectivity</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-2xl font-bold text-orange-600">₹999</span>
-                            <button onclick="orderViaWhatsApp('Wireless Keyboard & Mouse', '₹999', 'Ergonomic design with long battery life and wireless connectivity')"
-                                class="whatsapp-order-btn px-4 py-2 rounded-lg font-medium flex items-center">
-                                <i class="fab fa-whatsapp whatsapp-icon"></i> Order Now
-                            </button>
+                    
+                    <div class="flex justify-between items-center">
+                        <div class="flex flex-col">
+                            <span class="text-xs text-gray-500 mb-1">Starting From</span>
+                            <div class="flex items-center">
+                                <span class="text-xl font-bold text-orange-600">₹20,000</span>
+                               
+                            </div>
                         </div>
+                        <button onclick="orderViaWhatsApp('Hp 840 G7', '₹20,000', 'High-performance laptop with latest processor')"
+                            class="whatsapp-order-btn px-4 py-2 rounded-lg font-medium flex items-center">
+                            <i class="fab fa-whatsapp whatsapp-icon"></i> Order Now
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="text-center mt-12">
-                <a href="products.html"
-                    class="inline-block bg-orange-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-orange-700 transition">
-                    View All Products
-                </a>
+            
+            <!-- Product 2 -->
+            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300 hover:shadow-xl group">
+                <div class="relative overflow-hidden h-56">
+                    <!-- Carousel Container -->
+                    <div class="product-carousel relative w-full h-full" data-carousel="2">
+                        <!-- Images for Product 2 -->
+                        <div class="carousel-images flex transition-transform duration-500 ease-in-out">
+                            <img src="images/featured/dell1.jpeg" alt="Business Ultrabook Front"
+                                class="w-full h-full object-cover flex-shrink-0">
+                            <img src="images/featured/dell2.jpeg" alt="Business Ultrabook Side"
+                                class="w-full h-full object-cover flex-shrink-0">
+                            <img src="images/featured/dell3.jpeg" alt="Business Ultrabook Open"
+                                class="w-full h-full object-cover flex-shrink-0">
+                        </div>
+                        
+                        <!-- Navigation Arrows -->
+                        <button class="carousel-prev absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 transition-opacity group-hover:opacity-100 z-20">
+                            <i class="fas fa-chevron-left w-3 h-3"></i>
+                        </button>
+                        <button class="carousel-next absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 transition-opacity group-hover:opacity-100 z-20">
+                            <i class="fas fa-chevron-right w-3 h-3"></i>
+                        </button>
+                        
+                        <!-- Indicators/Dots -->
+                        <div class="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-1 z-20">
+                            <span class="carousel-dot w-2 h-2 rounded-full bg-white bg-opacity-50 cursor-pointer" data-index="0"></span>
+                            <span class="carousel-dot w-2 h-2 rounded-full bg-white bg-opacity-50 cursor-pointer" data-index="1"></span>
+                            <span class="carousel-dot w-2 h-2 rounded-full bg-white bg-opacity-50 cursor-pointer" data-index="2"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold mb-2">Dell Laptop</h3>
+                    <p class="text-gray-600 mb-4">Sleek and powerful for professionals with long battery life</p>
+                    
+                    <!-- Configuration Details -->
+                    <div class="mb-4 border-t border-gray-100 pt-3">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-2">Configuration:</h4>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div class="flex items-center">
+                                <i class="fas fa-microchip text-orange-500 mr-2"></i>
+                                <span>Intel i5 processor</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-memory text-orange-500 mr-2"></i>
+                                <span>16GB ddr4</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-hdd text-orange-500 mr-2"></i>
+                                <span>256 / 512GB SSD ram ddr4</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-desktop text-orange-500 mr-2"></i>
+                                <span>6th / 8th Gen</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-expand-alt text-orange-500 mr-2"></i>
+                                <span>15" 6 screen</span>
+                            </div>
+                            <!-- <div class="flex items-center">
+                                <i class="fas fa-battery-full text-orange-500 mr-2"></i>
+                                <span>12 Hours</span>
+                            </div> -->
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div class="flex flex-col">
+                            <span class="text-xs text-gray-500 mb-1">Starting From</span>
+                            <div class="flex items-center">
+                                <span class="text-xl font-bold text-orange-600">₹20,000</span>
+                             
+                            </div>
+                        </div>
+                        <button onclick="orderViaWhatsApp('Dell Laptop', '₹20,000', 'Sleek and powerful for professionals with long battery life')"
+                            class="whatsapp-order-btn px-4 py-2 rounded-lg font-medium flex items-center">
+                            <i class="fab fa-whatsapp whatsapp-icon"></i> Order Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300 hover:shadow-xl group">
+                <div class="relative overflow-hidden h-56">
+                    <!-- Carousel Container -->
+                    <div class="product-carousel relative w-full h-full" data-carousel="3">
+                        <!-- Images for Product 3 -->
+                        <div class="carousel-images flex transition-transform duration-500 ease-in-out">
+                            <img src="images/featured/del1.jpeg" alt="Wireless Keyboard Set"
+                                class="w-full h-full object-cover flex-shrink-0">
+                            <img src="images/featured/del2.jpeg" alt="Wireless Keyboard Close-up"
+                                class="w-full h-full object-cover flex-shrink-0">
+                            <img src="images/featured/del3.jpeg" alt="Wireless Mouse"
+                                class="w-full h-full object-cover flex-shrink-0">
+                        </div>
+                        
+                        <!-- Navigation Arrows -->
+                        <button class="carousel-prev absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 transition-opacity group-hover:opacity-100 z-20">
+                            <i class="fas fa-chevron-left w-3 h-3"></i>
+                        </button>
+                        <button class="carousel-next absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 transition-opacity group-hover:opacity-100 z-20">
+                            <i class="fas fa-chevron-right w-3 h-3"></i>
+                        </button>
+                        
+                        <!-- Indicators/Dots -->
+                        <div class="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-1 z-20">
+                            <span class="carousel-dot w-2 h-2 rounded-full bg-white bg-opacity-50 cursor-pointer" data-index="0"></span>
+                            <span class="carousel-dot w-2 h-2 rounded-full bg-white bg-opacity-50 cursor-pointer" data-index="1"></span>
+                            <span class="carousel-dot w-2 h-2 rounded-full bg-white bg-opacity-50 cursor-pointer" data-index="2"></span>
+                        </div>
+                    </div>
+                    <span class="absolute top-4 left-4 bg-orange-500 text-white text-sm px-2 py-1 rounded z-10">New</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold mb-2">Dell Latitude 5420</h3>
+                    <p class="text-gray-600 mb-4">Ergonomic design with long battery life and wireless connectivity</p>
+                    
+                    <!-- Configuration Details -->
+                    <div class="mb-4 border-t border-gray-100 pt-3">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-2">Specifications:</h4>
+                         <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div class="flex items-center">
+                                <i class="fas fa-microchip text-orange-500 mr-2"></i>
+                                <span>Intel i7 processor</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-memory text-orange-500 mr-2"></i>
+                                <span>16 / 32GB RAM ddr4</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-hdd text-orange-500 mr-2"></i>
+                                <span>256 / 512GB SSD</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-desktop text-orange-500 mr-2"></i>
+                                <span>11th Gen</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-expand-alt text-orange-500 mr-2"></i>
+                                <span>14" 6 screen</span>
+                            </div>
+                            <!-- <div class="flex items-center">
+                                <i class="fas fa-battery-full text-orange-500 mr-2"></i>
+                                <span>12 Hours</span>
+                            </div> -->
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div class="flex flex-col">
+                            <span class="text-xs text-gray-500 mb-1">Starting From</span>
+                            <div class="flex items-center">
+                                <span class="text-xl font-bold text-orange-600">₹25,000</span>
+                                
+                            </div>
+                        </div>
+                        <button onclick="orderViaWhatsApp('Dell Latitude 5420', '₹25,000', 'Ergonomic design with long battery life and wireless connectivity')"
+                            class="whatsapp-order-btn px-4 py-2 rounded-lg font-medium flex items-center">
+                            <i class="fab fa-whatsapp whatsapp-icon"></i> Order Now
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+        <div class="text-center mt-12">
+            <a href="products.html"
+                class="inline-block bg-orange-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-orange-700 transition">
+                View All Products
+            </a>
+        </div>
+    </div>
+</section>
 
     <!-- Why Choose Us Section -->
     <section class="py-16 relative overflow-hidden">
@@ -1651,6 +2007,148 @@
         });
 
     </script>
+
+    <script>
+    // Carousel Functionality - FIXED VERSION
+    document.addEventListener('DOMContentLoaded', function() {
+        const carousels = document.querySelectorAll('.product-carousel');
+        
+        carousels.forEach(carousel => {
+            const imagesContainer = carousel.querySelector('.carousel-images');
+            const dots = carousel.querySelectorAll('.carousel-dot');
+            const prevBtn = carousel.querySelector('.carousel-prev');
+            const nextBtn = carousel.querySelector('.carousel-next');
+            
+            let currentIndex = 0;
+            const totalImages = imagesContainer.children.length;
+            let autoSlideInterval;
+            
+            // Initialize
+            goToSlide(0);
+            startAutoSlide();
+            
+            // Function to move to specific slide - FIXED CALCULATION
+            function goToSlide(index) {
+                currentIndex = index;
+                // Correct calculation: each image is 33.3333% width, so move by -33.3333% for each slide
+                const translateX = -(currentIndex * (100 / totalImages));
+                imagesContainer.style.transform = `translateX(${translateX}%)`;
+                updateDots();
+            }
+            
+            // Function to update dot indicators
+            function updateDots() {
+                dots.forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.add('active');
+                        dot.style.opacity = '1';
+                        dot.style.transform = 'scale(1.2)';
+                    } else {
+                        dot.classList.remove('active');
+                        dot.style.opacity = '0.5';
+                        dot.style.transform = 'scale(1)';
+                    }
+                });
+            }
+            
+            // Next slide function
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % totalImages;
+                goToSlide(currentIndex);
+            }
+            
+            // Previous slide function
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+                goToSlide(currentIndex);
+            }
+            
+            // Auto slide functionality
+            function startAutoSlide() {
+                stopAutoSlide(); // Clear any existing interval first
+                autoSlideInterval = setInterval(nextSlide, 4000); // Change image every 4 seconds
+            }
+            
+            function stopAutoSlide() {
+                if (autoSlideInterval) {
+                    clearInterval(autoSlideInterval);
+                }
+            }
+            
+            // Event Listeners
+            if (nextBtn) {
+                nextBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    nextSlide();
+                    stopAutoSlide();
+                    startAutoSlide();
+                });
+            }
+            
+            if (prevBtn) {
+                prevBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    prevSlide();
+                    stopAutoSlide();
+                    startAutoSlide();
+                });
+            }
+            
+            // Dot click events
+            dots.forEach(dot => {
+                dot.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const index = parseInt(dot.getAttribute('data-index'));
+                    goToSlide(index);
+                    stopAutoSlide();
+                    startAutoSlide();
+                });
+            });
+            
+            // Pause auto slide on hover
+            carousel.addEventListener('mouseenter', stopAutoSlide);
+            carousel.addEventListener('mouseleave', startAutoSlide);
+            
+            // Touch/swipe support for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            carousel.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+                stopAutoSlide();
+            });
+            
+            carousel.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+                startAutoSlide();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        // Swipe left - next slide
+                        nextSlide();
+                    } else {
+                        // Swipe right - previous slide
+                        prevSlide();
+                    }
+                }
+            }
+            
+            // Reset carousel on window resize
+            window.addEventListener('resize', () => {
+                goToSlide(currentIndex);
+            });
+        });
+        
+        // Debug log to check if carousels are found
+        console.log('Total carousels found:', carousels.length);
+    });
+</script>
 
 </body>
 
